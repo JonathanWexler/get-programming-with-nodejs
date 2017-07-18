@@ -1,0 +1,11 @@
+body{
+  font-size: 14px;
+}
+h1{
+  color: blue;
+}
+.text-box{
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
