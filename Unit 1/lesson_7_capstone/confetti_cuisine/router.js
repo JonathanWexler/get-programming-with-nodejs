@@ -1,4 +1,4 @@
-exports.routes = {
+let routes = {
   'GET': {},
   'POST': {}
 }

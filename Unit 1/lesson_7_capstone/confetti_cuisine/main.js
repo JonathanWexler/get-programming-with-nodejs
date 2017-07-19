@@ -1,4 +1,3 @@
-// funder_dome app for crowd sourced fund raising
 const http = require('http');
 const router = require('./router');
 const fs = require('fs');
@@ -13,19 +12,19 @@ router.get('/', (req, res) => {
   getFile('views/index.html', res);
 });
 
-router.get('/product.html', (req, res) => {
+router.get('/courses.html', (req, res) => {
   res.writeHead(200, {"Content-Type": "text/html"});
-  getFile('views/product.html', res);
+  getFile('views/courses.html', res);
 });
 
-router.get('/fund.html', (req, res) => {
+router.get('/contact.html', (req, res) => {
   res.writeHead(200, {"Content-Type": "text/html"});
-  getFile('views/fund.html', res);
+  getFile('views/contact.html', res);
 });
 
 router.post('/', (req, res) => {
   res.writeHead(200, {"Content-Type": "text/plain"});
-  res.end("Thank you for funding");
+  res.end("Thank you for submitting");
 });
 
 // ASSETS
@@ -41,13 +40,17 @@ router.get('/product.jpg', (req, res) => {
   res.writeHead(200, {"Content-Type": "image/jpg"});
   getFile('public/images/product.jpg', res);
 });
-router.get('/funder_dome.css', (req, res) => {
+router.get('/confetti_cuisine.css', (req, res) => {
   res.writeHead(200, {"Content-Type": "text/css"});
-  getFile('public/css/funder_dome.css', res);
+  getFile('public/css/confetti_cuisine.css', res);
 });
-router.get('/funder_dome.js', (req, res) => {
+router.get('/bootstrap.css', (req, res) => {
+  res.writeHead(200, {"Content-Type": "text/css"});
+  getFile('public/css/bootstrap.css', res);
+});
+router.get('/confetti_cuisine.js', (req, res) => {
   res.writeHead(200, {"Content-Type": "text/js"});
-  getFile('public/js/funder_dome.js', res);
+  getFile('public/js/confetti_cuisine.js', res);
 });
 
 // File Loading
