@@ -1,0 +1,15 @@
+{
+  "name": "express_routes",
+  "version": "1.0.0",
+  "description": "An express app with routes",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Wexler",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  }
+}
