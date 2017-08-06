@@ -9,6 +9,11 @@ const layouts = require('express-ejs-layouts');
 app.set('view engine', 'ejs');
 app.use(layouts);
 
+// Set up database
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/csa_app_db');
+mongoose.Promise = global.Promise;
+
 // Add controllers
 const subscribersController = require('./controllers/subscribersController');
 const homeController = require('./controllers/homeController');
@@ -18,7 +23,7 @@ const Subscriber = require('./models/subscriber');
 
 // App to use body parser
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Define middlware
@@ -34,6 +39,7 @@ router.post('/sign-up',homeController.postedSignUpForm );
 
 router.get('/subscribers', subscribersController.getAllSubscribers);
 router.get('/subscribe', subscribersController.getSubscriptionPage);
+router.post('/subscribe', subscribersController.create);
 // router.post('/subscribe', subscribersController.saveSubscriber);
 router.get('/', (req, res) => {
   res.render('index', {title: "Welcome to Confetti Cuisine"});

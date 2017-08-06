@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const {Schema} = require('mongoose');
 
 var subscriberSchema = new Schema({
   name: {
@@ -13,26 +13,17 @@ var subscriberSchema = new Schema({
   },
   zipCode:  {
     type: Number,
-    min: [5, 'Zip Code too Short'],
-    max: 8
+    min: [1000, 'Zip code too short'],
+    max: 99999
   }
 });
 
 subscriberSchema.methods.getInfo = function() {
-  return `Name: ${this.name} Email: ${this.email}`
+  return `Name: ${this.name} Email: ${this.email} Zip Code: ${this.zipCode}`;
 }
 
-subscriberSchema.methods.findLocalSubscribers = function(){
-  return new Promise((resolve, reject)=>{
-    return this.model('Subscriber').find({zipCode: this.zipCode});
-  })
+subscriberSchema.methods.findLocalSubscribers = function() {
+  return this.model('Subscriber').find({zipCode: this.zipCode}).exec();
 }
-
-// Static method for finding a single
-subscriberSchema.statics.findByName = function(name) {
-  return new Promise((resolve, reject) => {
-    return this.find({ name: new RegExp(name, 'i') });
-  });
-};
 
 module.exports = mongoose.model('Subscriber', subscriberSchema);
