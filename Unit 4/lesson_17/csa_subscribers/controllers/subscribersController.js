@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
 const Subscriber = require('../models/subscriber');
-const db = mongoose.connection;
-
 
 // Finds all subscribers and sends them to the subscribers page
 exports.getAllSubscribers = (req, res) => {

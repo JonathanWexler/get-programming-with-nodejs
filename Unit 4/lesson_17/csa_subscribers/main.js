@@ -17,9 +17,12 @@ mongoose.Promise = global.Promise;
 // Add controllers
 const subscribersController = require('./controllers/subscribersController');
 const homeController = require('./controllers/homeController');
+const usersController = require('./controllers/usersController');
 
 // Add models
 const Subscriber = require('./models/subscriber');
+const Group = require('./models/group');
+// const User = require('./models/user');
 
 // App to use body parser
 const bodyParser = require('body-parser');
@@ -33,6 +36,11 @@ router.use(function (req,res,next) {
 });
 
 //Define routes
+router.get('/users', usersController.index );
+router.get('/users/new', usersController.new );
+router.post('/users/create', usersController.create );
+
+
 router.get('/courses', homeController.showCourses );
 router.get('/contact', homeController.showSignUp );
 router.post('/sign-up',homeController.postedSignUpForm );

@@ -15,7 +15,8 @@ var subscriberSchema = new Schema({
     type: Number,
     min: [1000, 'Zip code too short'],
     max: 99999
-  }
+  },
+  groups: [{type: Schema.Types.ObjectId, ref: 'Group'}]
 });
 
 subscriberSchema.methods.getInfo = function() {
