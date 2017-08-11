@@ -39,6 +39,11 @@ router.use(function (req,res,next) {
 router.get('/users', usersController.index );
 router.get('/users/new', usersController.new );
 router.post('/users/create', usersController.create );
+router.get('/users/:id', usersController.show );
+router.get('/users/:id/edit', usersController.edit );
+router.post('/users/:id/update', usersController.update );
+router.get('/users/:id/delete', usersController.delete );
+
 
 
 router.get('/courses', homeController.showCourses );

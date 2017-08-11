@@ -24,3 +24,10 @@ Subscriber.findOne({}).then(s=> testSubscriber = s);
 var User = require('./models/user.js')
 
 User.create({name: {first: 'Jon', last: 'Wexler '}, email: 'jon@jonwexler.com', password: 'pass123'}).then(u=> console.log(u)).catch(e => console.log(e.message))
+
+
+User.findById('598debca27ad9f28de8f715a').remove({}).exec().then(user => {
+  console.log(user);
+}).catch(error => {
+  console.log(`Error updating user by ID: ${error.message}`)
+})
