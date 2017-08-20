@@ -1,5 +1,5 @@
 <div class="text-center">
-  <form class="form-signin" method="POST" action=<%= `/users/${user._id}/update` %> >
+  <form class="form-signin" method="PUT" action=<%= `/users/${user._id}/update` %> >
     <h2 class="form-signin-heading">Create a new user:</h2>
     <label for="inputFirstName" class="sr-only">First Name</label>
     <input type="text" name="first" id="inputFirstName" class="form-control" placeholder="First" autofocus value=<%= user.name.first%>>

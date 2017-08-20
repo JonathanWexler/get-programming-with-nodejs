@@ -1,111 +1,87 @@
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+// Giving access to the user model
+const User = require('../models/user');
 
-
-/**
- * Load
- */
-
-exports.load = async(function* (req, res, next, _id) {
-  const criteria = { _id };
-  try {
-    req.profile = yield User.load({ criteria });
-    if (!req.profile) return next(new Error('User not found'));
-  } catch (err) {
-    return next(err);
-  }
-  next();
-});
-
-/**
- * Create user
- */
-
-exports.create = async(function* (req, res) {
-  const user = new User(req.body);
-  user.provider = 'local';
-  try {
-    yield user.save();
-    req.logIn(user, err => {
-      if (err) req.flash('info', 'Sorry! We are not able to log you in!');
-      return res.redirect('/');
-    });
-  } catch (err) {
-    const errors = Object.keys(err.errors)
-      .map(field => err.errors[field].message);
-
-    res.render('users/signup', {
-      title: 'Sign up',
-      errors,
-      user
-    });
-  }
-});
-
-/**
- *  Show profile
- */
-
-exports.show = function (req, res) {
-  const user = req.profile;
-  respond(res, 'users/show', {
-    title: user.name,
-    user: user
+// Setting up callback for users index page
+exports.index = (req, res) => {
+  User.find({})
+  .then(users => {
+    res.render('users/index', {users: users})
+  })
+  .catch( error =>{
+    console.log(`Error fetching users: ${error.message}`)
+    res.redirect('/');
   });
-};
+}
 
-exports.signin = function () {};
+// Create action
+exports.new = (req, res) => {
+  res.render('users/new');
+}
+exports.create = (req, res) => {
+  var userParams = getUserParams(req.body);
+  User.create(userParams)
+  .then(user => {
+    res.redirect('/users');
+  })
+  .catch(error => {
+    console.log(`Error fetching users: ${error.message}`)
+    res.redirect('/');
+  })
+}
 
-/**
- * Auth callback
- */
+// Read action
+exports.show = (req, res) => {
+  var userId = req.params.id;
+  User.findById(userId)
+  .then(user => {
+    res.render('users/show', {user: user});
+  })
+  .catch(error => {
+    console.log(`Error fetching user by ID: ${error.message}`)
+    res.redirect('/');
+  })
+}
 
-exports.authCallback = login;
+// Update action
+exports.edit = (req, res) => {
+  var userId = req.params.id;
+  User.findById(userId)
+  .then(user => {
+    res.render('users/edit', {user: user});
+  })
+  .catch(error => {
+    console.log(`Error fetching user by ID: ${error.message}`)
+    res.redirect('/');
+  })
+}
 
-/**
- * Show login form
- */
+exports.update = (req, res) => {
+  var userId = req.params.id;
+  var userParams = getUserParams(req.body);
+  User.findByIdAndUpdate(userId, { $set: userParams })
+  .then(user => {
+    res.redirect(`/users/${userId}`);
+  })
+  .catch(error => {
+    console.log(`Error updating user by ID: ${error.message}`)
+    res.redirect('/');
+  })
+}
 
-exports.login = function (req, res) {
-  res.render('users/login', {
-    title: 'Login'
-  });
-};
+// Delete action
+exports.delete = (req, res) => {
+  var userId = req.params.id;
+  User.findByIdAndRemove(userId)
+  .then(user => {
+    console.log(user);
+    res.redirect('/users');
+  })
+  .catch(error => {
+    console.log(`Error deleting user by ID: ${error.message}`)
+    res.redirect('/');
+  })
+}
 
-/**
- * Show sign up form
- */
-
-exports.signup = function (req, res) {
-  res.render('users/signup', {
-    title: 'Sign up',
-    user: new User()
-  });
-};
-
-/**
- * Logout
- */
-
-exports.logout = function (req, res) {
-  req.logout();
-  res.redirect('/login');
-};
-
-/**
- * Session
- */
-
-exports.session = login;
-
-/**
- * Login
- */
-
-function login (req, res) {
-  const redirectTo = req.session.returnTo
-    ? req.session.returnTo
-    : '/';
-  delete req.session.returnTo;
-  res.redirect(redirectTo);
+function getUserParams(body) {
+  return {name: {first: body.first, last: body.last}, email: body.email, password: body.password, zipCode: body.zipCode};
 }

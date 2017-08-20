@@ -1,5 +1,7 @@
+// Gioving access to the user model
 const User = require('../models/user');
 
+// Setting up callback for users index page
 exports.index = (req, res) => {
   User.find({})
   .then(users => {
@@ -11,6 +13,7 @@ exports.index = (req, res) => {
   });
 }
 
+// Create action
 exports.new = (req, res) => {
   res.render('users/new', {title: "New User"});
 }
@@ -26,6 +29,7 @@ exports.create = (req, res) => {
   })
 }
 
+// Read action
 exports.show = (req, res) => {
   var userId = req.params.id;
   User.findById(userId)
@@ -38,6 +42,7 @@ exports.show = (req, res) => {
   })
 }
 
+// Update action
 exports.edit = (req, res) => {
   var userId = req.params.id;
   User.findById(userId)
@@ -63,6 +68,7 @@ exports.update = (req, res) => {
   })
 }
 
+// Delete action
 exports.delete = (req, res) => {
   var userId = req.params.id;
   User.findByIdAndRemove(userId)
@@ -79,3 +85,48 @@ exports.delete = (req, res) => {
 function getUserParams(body) {
   return {name: {first: body.first, last: body.last}, email: body.email, password: body.password, zipCode: body.zipCode};
 }
+
+
+// Login form
+
+exports.login = (req, res) => {
+  res.render('users/login', {title: "Login"});
+}
+
+// exports.authenticate = (req, res) => {
+//   User.findOne({email: req.body.email})
+//   .then(user => {
+//     if (user.password == req.body.password){
+//       res.redirect(`/users/${user._id}`);
+//     } else {
+//       res.redirect('/users/login');
+//     }
+//   })
+//   .catch(e=> {
+//     console.log(`Error logging in user: ${e.message}`);
+//     res.redirect('/users/login');
+//   });
+// }
+
+exports.authenticate = (req, res) => {
+  var user;
+  User.findOne({email: req.body.email})
+  .then(u => {
+    user = u;
+    return user.passwordComparison(req.body.password);
+  })
+  .then(passwordsMatch =>{
+    if (passwordsMatch) {
+      res.redirect(`/users/${user._id}`);
+    } else {
+      throw new Error("Passwords do not match");
+    }
+  })
+  .catch(e=> {
+    console.log(`Error logging in user: ${e.message}`);
+    res.redirect('/users/login');
+  });
+}
+
+
+// User.findOne({email: 'j@toop.com'}).then(u => u.passwordsMatch('123123')).then(res => console.log(res));

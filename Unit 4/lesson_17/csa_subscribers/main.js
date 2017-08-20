@@ -28,6 +28,8 @@ const Group = require('./models/group');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+const methodOverride = require('method-override');
+app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 
 // Define middlware
 router.use(function (req,res,next) {
@@ -36,13 +38,20 @@ router.use(function (req,res,next) {
 });
 
 //Define routes
+// Add custom paths above :id params paths
 router.get('/users', usersController.index );
 router.get('/users/new', usersController.new );
 router.post('/users/create', usersController.create );
+router.get('/users/login', usersController.login );
+router.post('/users/login', usersController.authenticate );
+
 router.get('/users/:id', usersController.show );
 router.get('/users/:id/edit', usersController.edit );
-router.post('/users/:id/update', usersController.update );
-router.get('/users/:id/delete', usersController.delete );
+router.put('/users/:id/update', usersController.update );
+router.delete('/users/:id/delete', usersController.delete );
+
+// router.get('/users/signup', usersController.signup );
+// router.post('/users/signup', usersController.signup );
 
 
 

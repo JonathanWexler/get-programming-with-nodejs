@@ -1,20 +1,26 @@
 const mongoose = require('mongoose');
-let subscriberSchema = mongoose.Schema({
-  name: String,
-  email: String
+const {Schema} = require('mongoose');
+
+var subscriberSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  zipCode:  {
+    type: Number,
+    min: [1000, 'Zip code too short'],
+    max: 99999
+  },
+  courses: [{type: Schema.Types.ObjectId, ref: 'Course'}]
 });
 
 subscriberSchema.methods.getInfo = function() {
-  console.log(this);
-  return `Name: ${this.name} Email: ${this.email}`
+  return `Name: ${this.name} Email: ${this.email} Zip Code: ${this.zipCode}`;
 }
 
-let Subscriber = exports.Subscriber = mongoose.model('Subscriber', subscriberSchema);
-
-exports.getSubscriberById = (id) => {
-  return new Promise((resolve, reject)=>{
-    Subscriber.findById(id, (error, data) => {
-      return error ? reject(error) : resolve(data);
-    });
-  });
-}
+module.exports = mongoose.model('Subscriber', subscriberSchema);
