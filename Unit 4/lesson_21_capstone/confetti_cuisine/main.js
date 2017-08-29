@@ -29,11 +29,6 @@ const subscribersController = require('./controllers/subscribersController');
 const coursesController = require('./controllers/coursesController');
 const usersController = require('./controllers/usersController');
 
-// Add models
-const Subscriber = require('./models/subscriber');
-const Course = require('./models/course');
-const User = require('./models/user');
-
 // Define middlware
 router.use(function (req, res, next) {
   console.log("/" + req.method);
