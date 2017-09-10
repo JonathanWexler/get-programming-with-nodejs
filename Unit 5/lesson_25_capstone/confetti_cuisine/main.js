@@ -17,7 +17,6 @@ app.use(connectFlash());
 
 //Lesson 24
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -61,9 +60,7 @@ router.use(function (req, res, next) {
 
 app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
-  console.log(req.isAuthenticated())
   res.locals.loggedIn = req.isAuthenticated();
-  console.log(req.user)
   res.locals.currentUser = req.user;
   next();
 })

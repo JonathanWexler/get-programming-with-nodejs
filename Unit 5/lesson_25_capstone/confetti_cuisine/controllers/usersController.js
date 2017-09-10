@@ -30,7 +30,6 @@ exports.create = (req, res) => {
       res.redirect('/');
     }
   });
-
 }
 
 // User.create(userParams)

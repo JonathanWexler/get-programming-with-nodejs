@@ -1,0 +1,23 @@
+.form-signin{
+  width: 300px;
+  margin: 0 auto;
+}
+
+.profile{
+  padding: 50px;
+}
+
+img{
+  width: 200px;
+}
+.flash{
+  padding: 20px;
+  background-color: lightgray;
+  font-size: 18px;
+}
+.error{
+    color: darkred;
+}
+.success{
+    color: darkgreen;
+}
