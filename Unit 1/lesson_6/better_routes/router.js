@@ -1,6 +1,6 @@
 const http = require('http');
 
-let routes = {
+var routes = {
   'GET': {
     '/index.html': (req, res) => {
       res.writeHead(200, {"Content-Type": "text/plain"})

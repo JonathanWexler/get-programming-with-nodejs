@@ -4,6 +4,7 @@ const app = express();
 
 let homeController = require('./controllers/homeController');
 
+app.set('port', process.env.PORT || 3000);
 app.use(express.static(`${__dirname}/public`));
 
 app.set('view engine', 'ejs');
@@ -20,6 +21,6 @@ app.use((req, res) => {
   res.sendFile(`${__dirname}/public/404.html`);
 });
 
-app.listen(3000, () => {
+app.listen(app.get('port'), () => {
   console.log("Server running");
 });

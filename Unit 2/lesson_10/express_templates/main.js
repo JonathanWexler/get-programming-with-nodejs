@@ -1,6 +1,8 @@
 const express = require('express');
-const layouts = require('express-ejs-layouts'); 
+const layouts = require('express-ejs-layouts');
 const app = express();
+
+app.set('port', process.env.PORT || 3000);
 
 let homeController = require('./controllers/homeController');
 
@@ -13,6 +15,6 @@ app.get('/items/:vegetable', homeController.send_req_param);
 
 app.get('/name/:myName', homeController.respond_with_name);
 
-app.listen(3000, () => {
+app.listen(app.get('port'), () => {
   console.log("Server running");
 });

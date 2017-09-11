@@ -6,8 +6,6 @@ const homeController = require('./controllers/homeController');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-
 app.post('/', (req, res) =>{
   console.log(req.body);
   console.log(req.query);

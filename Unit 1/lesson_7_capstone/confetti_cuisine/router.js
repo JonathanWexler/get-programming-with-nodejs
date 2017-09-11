@@ -1,4 +1,4 @@
-let routes = {
+var routes = {
   'GET': {},
   'POST': {}
 }
