@@ -9,11 +9,11 @@
   <script src="/js/jquery.min.js"></script>
 
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/confetti_cuisine.js"></script>
+  <script type="text/javascript" src="/js/confettiCuisine.js"></script>
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link href="/css/confetti_cuisine.css" rel="stylesheet">
+  <link href="/css/confettiCuisine.css" rel="stylesheet">
   <title>Confetti Cuisine</title>
 </head>
 
@@ -35,8 +35,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/courses">Courses <span class="sr-only">(current)</span></a></li>
           <li><a href="/subscribers/new">Contact</a></li>
+          <li><%- include _coursesModal %></li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if(locals.loggedIn) { %>

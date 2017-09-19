@@ -21,3 +21,9 @@ img{
 .success{
     color: darkgreen;
 }
+
+.course-item{
+  background-color: lightblue;
+  padding: 10px;
+  border: 1px solid white;
+}
