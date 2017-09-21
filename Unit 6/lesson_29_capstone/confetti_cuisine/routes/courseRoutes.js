@@ -10,5 +10,6 @@ router.get('/:id', coursesController.show );
 router.get('/:id/edit', coursesController.edit );
 router.put('/:id/update', coursesController.update );
 router.delete('/:id/delete', coursesController.delete );
+router.get('/:id/enroll', coursesController.enroll );
 
 module.exports = router;

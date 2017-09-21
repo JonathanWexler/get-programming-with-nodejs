@@ -1,5 +1,6 @@
 // Giving access to the course model
 const Course = require('../models/course');
+const User = require('../models/user');
 
 // Setting up callback for courses index page
 exports.index = (req, res) => {
@@ -83,6 +84,27 @@ exports.delete = (req, res) => {
     console.log(`Error deleting course by ID: ${error.message}`)
     res.redirect('/');
   })
+}
+
+exports.enroll = (req, res) => {
+  var courseId = req.params.id,
+  currentUser = req.user;
+
+  if (currentUser) {
+    User.findByIdAndUpdate(currentUser, { $addToSet: { courses: courseId } })
+    .then(() => {
+      req.flash('success', `${currentUser.fullName} is successfully enrolled!` )
+      res.redirect(`/courses/${courseId}`);
+    })
+    .catch(error => {
+      req.flash('error', `Error enrolling.` )
+      console.log(`Error enrolling ${currentUser._id} in ${courseId}: ${error.message}`)
+      res.redirect('/');
+    })
+  } else {
+    req.flash('error', `You must log in to enroll!` )
+    res.redirect(`/users/login`);
+  }
 }
 
 function getCourseParams(body) {

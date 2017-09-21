@@ -7,7 +7,7 @@ $(document).ready(()=>{
             <span>${course.name}</span>
             <span>$${course.cost}</span>
             <div>${course.description}</div>
-            <a href="/course/${course._id}/enroll">
+            <a href="/courses/${course._id}/enroll">
             <button class="btn btn-info btn-sm" >Enroll</button>
             </a>
           </div>`);
