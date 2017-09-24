@@ -34,7 +34,7 @@ app.use(layouts);
 
 // Set up database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/csa_app_db');
+mongoose.connect('mongodb://localhost/confetti_cuisine_db');
 mongoose.Promise = global.Promise;
 
 // App to use body parser
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 })
 
 // Tell the app to use the router we defined
-app.use("/", router);
+app.use('/', router);
 
 app.listen(3000, ()=>{
   console.log(`Server running at http://localhost:3000`);
