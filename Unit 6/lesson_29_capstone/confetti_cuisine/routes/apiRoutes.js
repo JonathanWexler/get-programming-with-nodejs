@@ -1,8 +1,6 @@
 const router = require('express').Router();
-const coursesController = require('../controllers/coursesController');
+const coursesController = require('../controllers/api/coursesController');
 
-// subscribers ROUTES
-// Courses ROUTES
 router.get('/courses', coursesController.index );
 
 module.exports = router;
