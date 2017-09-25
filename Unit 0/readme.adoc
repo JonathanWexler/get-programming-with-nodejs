@@ -4,3 +4,4 @@ Code in this folder references examples in Unit 0:
 
 * lesson_2: hello.js
 * lesson_2: messages.js
+* lesson_2: printer.js
