@@ -18,9 +18,11 @@
     "express-ejs-layouts": "^2.3.1",
     "express-session": "^1.15.5",
     "express-validator": "^3.2.1",
+    "jsonwebtoken": "^8.0.1",
     "method-override": "^2.3.9",
     "mongoose": "^4.11.8",
     "passport": "^0.4.0",
-    "passport-local-mongoose": "^4.1.0"
+    "passport-local-mongoose": "^4.1.0",
+    "rand-token": "^0.3.0"
   }
 }

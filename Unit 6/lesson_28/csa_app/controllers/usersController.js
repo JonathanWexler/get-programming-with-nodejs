@@ -6,7 +6,7 @@ const passport = require('passport');
 exports.index = (req, res) => {
   User.find({})
   .then(users => {
-    res.json({users: users});
+    res.render('users/index', {users: users});
   })
   .catch( error =>{
     console.log(`Error fetching users: ${error.message}`)
@@ -63,7 +63,7 @@ exports.show = (req, res) => {
   })
   .catch(error => {
     console.log(`Error fetching user by ID: ${error.message}`)
-    res.redirect('/');
+    res.redirect('/users');
   })
 }
 
