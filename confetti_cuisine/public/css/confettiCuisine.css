@@ -1,0 +1,53 @@
+.form-signin{
+  width: 300px;
+  margin: 0 auto;
+}
+
+.profile{
+  padding: 50px;
+}
+
+img{
+  width: 200px;
+}
+.flash{
+  padding: 20px;
+  background-color: lightgray;
+  font-size: 18px;
+}
+.error{
+    color: darkred;
+}
+.success{
+    color: darkgreen;
+}
+
+.course-item{
+  background-color: lightblue;
+  padding: 10px;
+  border: 1px solid white;
+}
+
+
+/*CHAT*/
+
+#chat{
+  border: 2px solid black;
+  min-height: 200px;
+  height: 300px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+li {
+  list-style: none;
+  padding: 3px;
+}
+
+.chat-icon{
+  font-size: 35px;
+}
+
+.currentUser{
+  color: green;
+}

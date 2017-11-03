@@ -1,0 +1,35 @@
+{
+  "name": "confetti_cuisine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main",
+    "debug": "DEBUG=express:* node main"
+  },
+  "author": "Jon Wexler",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "express-ejs-layouts": "^2.3.1",
+    "express-session": "^1.15.5",
+    "express-validator": "^3.2.1",
+    "method-override": "^2.3.9",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.11.8",
+    "passport": "^0.4.0",
+    "passport-local-mongoose": "^4.1.0",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.8.0"
+  }
+}
