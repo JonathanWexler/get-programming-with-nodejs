@@ -1,3 +1,5 @@
+'strict mode';
+
 const http = require('http');
 const router = require('./router');
 const fs = require('fs');
