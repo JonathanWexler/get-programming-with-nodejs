@@ -1,1 +1,4 @@
-let messages = ["A change of environment can be a good thing!", "You'll make it!", "Just run with the code!"];
+'strict mode';
+
+// List three positive messages as strings
+let messages = ["A change of environment can be a good thing!", "You will make it!", "Just run with the code!"];
