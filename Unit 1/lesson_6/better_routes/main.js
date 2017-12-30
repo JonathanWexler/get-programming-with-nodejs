@@ -1,8 +1,8 @@
 'strict mode';
 
-const http = require('http');
-const router = require('./router');
-const fs = require('fs');
+const http = require('http'),
+  router = require('./router'),
+  fs = require('fs');
 
 http.createServer(router.handle).listen(3000);
 console.log('Server running at http://localhost:3000');
@@ -14,7 +14,7 @@ router.get('/', (req, res)=>{
 
 router.get('/index.html', (req, res)=>{
   res.writeHead(200, {"Content-Type": "text/html"});
-  getFile('views/index.html', res);
+  customReadFile('views/index.html', res);
 });
 
 router.post('/', (req, res)=>{
@@ -22,7 +22,7 @@ router.post('/', (req, res)=>{
   res.end("POSTED");
 });
 
-function getFile(file, res) {
+function customReadFile(file, res) {
   let contents = "";
   fs.readFile(`./${file}`, (errors, data) => {
     if (errors) {
