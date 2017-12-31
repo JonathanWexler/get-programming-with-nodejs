@@ -1,3 +1,5 @@
+'strict mode';
+
 var routes = {
   'GET': {},
   'POST': {}

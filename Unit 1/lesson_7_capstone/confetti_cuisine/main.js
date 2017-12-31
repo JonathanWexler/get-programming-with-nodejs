@@ -1,6 +1,8 @@
-const http = require('http');
-const router = require('./router');
-const fs = require('fs');
+'strict mode';
+
+const http = require('http'),
+  router = require('./router'),
+  fs = require('fs');
 
 
 http.createServer(router.handle).listen(3000);
