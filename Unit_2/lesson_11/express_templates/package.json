@@ -10,6 +10,7 @@
   "author": "Jon Wexler",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
     "express-ejs-layouts": "^2.3.1"
   }
