@@ -1,8 +1,8 @@
-'strict mode';
+'use strict';
 
 const express = require('express'),
  app = express();
- 
+
 app.get('/', (req, res) => {
   console.log(req.params)
   console.log(req.body)

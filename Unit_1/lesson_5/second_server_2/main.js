@@ -1,7 +1,7 @@
-'strict mode';
+'use strict';
 
-const http = require('http');
-const app = http.createServer();
+const http = require('http'),
+  app = http.createServer();
 
 app.on('request',(req, res) => {
   console.log(req.method);

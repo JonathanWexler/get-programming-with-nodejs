@@ -1,4 +1,4 @@
-'strict mode';
+'use strict';
 
 exports.logRequestPaths =  (req, res, next) => {
   console.log(`request made to: ${req.url}`);

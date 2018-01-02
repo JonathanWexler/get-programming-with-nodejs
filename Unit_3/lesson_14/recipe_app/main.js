@@ -6,20 +6,13 @@ const express = require('express'),
   homeController = require('./controllers/homeController'),
   errorController = require('./controllers/errorController'),
   bodyParser = require('body-parser'),
-  MongoDB = require('mongodb').MongoClient;
+  mongoose = require('mongoose');
 
-MongoDB.connect('mongodb://localhost:27017', (error, client) => {
-  if (error) throw err;
-  let db = client.db('recipe_db');
-  db.collection('contacts').find().toArray( (error, data) => {
-    if (error) throw err;
-    console.log(data);
-  });
+mongoose.connect('mongodb://localhost/recipe_db');
+var db = mongoose.connection;
 
-  db.collection('contacts').insert({name: "Freddie Mercury", email: "fred@queen.com"}, (error, db)=>{
-    if(error) throw error;
-    console.log(db);
-  });
+db.once('open', () => {
+  console.log("Successfully connected with Mongoose!");
 });
 
 app.set('port', process.env.PORT || 3000);

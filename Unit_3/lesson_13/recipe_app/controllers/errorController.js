@@ -1,4 +1,4 @@
-'strict mode';
+'use strict';
 
 exports.pageNotFoundError = (req, res) => {
   res.status(404);

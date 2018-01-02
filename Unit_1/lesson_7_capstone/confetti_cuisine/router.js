@@ -1,4 +1,4 @@
-'strict mode';
+'use strict';
 
 var routes = {
   'GET': {},

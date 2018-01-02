@@ -1,4 +1,4 @@
-'strict mode';
+'use strict';
 
 const cities = require('cities');
 

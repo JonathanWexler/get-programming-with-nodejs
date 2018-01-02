@@ -1,7 +1,7 @@
-'strict mode';
+'use strict';
 
-const http = require('http');
-const fs = require('fs');
+const http = require('http'),
+  fs = require('fs');
 
 http.createServer( (req, res) => {
   fs.readFile(`views${req.url}.html`, (error, data) => {

@@ -1,7 +1,7 @@
-'strict mode';
+'use strict';
 
-const http = require('http');
-const fs = require('fs');
+const http = require('http'),
+  fs = require('fs');
 
 http.createServer((req,res) => {
   let url = req.url;
