@@ -1,5 +1,5 @@
 {
-  "name": "recipe_app",
+  "name": "recipe_app_schema",
   "version": "1.0.0",
   "description": "An express app to list recipes",
   "main": "main.js",
