@@ -57,7 +57,6 @@ router.get('/confetti_cuisine.js', (req, res) => {
 
 // File Loading
 let getFile = (file, res) => {
-  let contents = "";
   fs.readFile(`./${file}`, (errors, data) => {
     if (errors) {
       res.writeHead(500, {"Content-Type": "text/plain"});

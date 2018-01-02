@@ -18,4 +18,4 @@ exports.postedSignUpForm = (req, res) => {
 
 exports.postedContactForm = (req, res) => {
   res.send('Form Submitted');
-}
+};

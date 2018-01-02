@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost/recipe_db');
 var db = mongoose.connection;
 
 let subscriberSchema = mongoose.Schema({
-  name: String, 
+  name: String,
   email: String,
   zipCode: Number
 });
@@ -20,7 +20,7 @@ let subscriberSchema = mongoose.Schema({
 var Subscriber = mongoose.model('Subscriber', subscriberSchema);
 
 let subscriber1  = new Subscriber({name: "Jon Wexler", email: "jon@jonwexler.com"});
-subscriber1.save((error, savedDocument) =>{
+subscriber1.save((error, savedDocument, next) =>{
   if (error) next(error);
   console.log(savedDocument);
 });
