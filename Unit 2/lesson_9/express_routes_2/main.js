@@ -1,7 +1,9 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const homeController = require('./controllers/homeController');
+'strict mode';
+
+const express = require('express'),
+ app = express(),
+ bodyParser = require('body-parser'),
+ homeController = require('./controllers/homeController');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

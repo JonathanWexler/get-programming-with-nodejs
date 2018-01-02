@@ -1,11 +1,14 @@
-const express = require('express');
-const app = express();
-let homeController = require('./controllers/homeController');
+'strict mode';
+
+const express = require('express'),
+ app = express(),
+ bodyParser = require('body-parser'),
+ homeController = require('./controllers/homeController');
 
 
-app.use(homeController.log_request_paths);
+app.use(homeController.logRequestPaths);
 
-app.get('/items/:vegetable', homeController.send_req_param);
+app.get('/items/:vegetable', homeController.sendReqParam);
 
 app.listen(3000, () => {
   console.log("Server running");
