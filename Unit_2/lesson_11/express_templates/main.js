@@ -6,6 +6,7 @@ const express = require('express'),
   homeController = require('./controllers/homeController'),
   errorController = require('./controllers/errorController');
 
+app.use(express.static(`${__dirname}/public`));
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
 

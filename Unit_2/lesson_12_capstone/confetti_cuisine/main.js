@@ -1,9 +1,11 @@
-const express = require('express');
-const app = express();
-const layouts = require('express-ejs-layouts');
-const homeController = require('./controllers/homeController');
-const errorController = require('./controllers/errorController');
-const bodyParser = require('body-parser');
+'strict mode';
+
+const express = require('express'),
+  layouts = require('express-ejs-layouts'),
+  app = express(),
+  homeController = require('./controllers/homeController'),
+  errorController = require('./controllers/errorController'),
+  bodyParser = require('body-parser');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -13,7 +15,6 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 
 app.get('/', (req, res) => {
   res.render('index');

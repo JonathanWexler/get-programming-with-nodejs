@@ -1,3 +1,5 @@
+'strict mode';
+
 exports.pageNotFoundError = (req, res) => {
   res.status(404);
   res.send('404 | The course or recipe  you are looking for may not exist!');
