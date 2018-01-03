@@ -2,10 +2,10 @@
 
 const mongoose = require('mongoose');
 
-let subscriberSchema = mongoose.Schema({
+var subscriberSchema = mongoose.Schema({
   name: String,
   email: String,
   zipCode: Number
 });
 
-module.exports = mongoose.model('Subscriber', subscriberSchema); 
+module.exports = mongoose.model('Subscriber', subscriberSchema);

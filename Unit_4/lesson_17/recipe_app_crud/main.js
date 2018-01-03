@@ -3,31 +3,22 @@
 const express = require('express'),
   layouts = require('express-ejs-layouts'),
   app = express(),
+
   homeController = require('./controllers/homeController'),
   errorController = require('./controllers/errorController'),
+  subscribersController = require('./controllers/subscribersController'),
+
   bodyParser = require('body-parser'),
-  mongoose = require('mongoose');
+  mongoose = require('mongoose'),
+
+  Subscriber = require('./models/subscriber');
+
+mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost/recipe_db');
 var db = mongoose.connection;
 
-var subscriberSchema = mongoose.Schema({
-  name: String,
-  email: String,
-  zipCode: Number
-});
-
-var Subscriber = mongoose.model('Subscriber', subscriberSchema);
-
-let subscriber1  = new Subscriber({name: "Jon Wexler", email: "jon@jonwexler.com"});
-subscriber1.save((error, savedDocument, next) =>{
-  if (error) next(error);
-  console.log(savedDocument);
-});
-
-db.once('open', () => {
-  console.log("Successfully connected with Mongoose!");
-});
+db.once('open', () => { console.log("Successfully connected with Mongoose!")});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -41,6 +32,10 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+app.get('/subscribers', subscribersController.getAllSubscribers);
+app.get('/subscribe', subscribersController.getSubscriptionPage);
+app.post('/subscribe', subscribersController.saveSubscriber);
 
 app.get('/courses', homeController.showCourses );
 app.get('/contact', homeController.showSignUp );
