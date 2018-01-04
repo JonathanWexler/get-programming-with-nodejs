@@ -7,12 +7,11 @@ const express = require('express'),
   homeController = require('./controllers/homeController'),
   errorController = require('./controllers/errorController'),
   subscribersController = require('./controllers/subscribersController'),
+  coursesController = require('./controllers/coursesController'),
+  usersController = require('./controllers/usersController'),
 
   bodyParser = require('body-parser'),
-  mongoose = require('mongoose'),
-
-  Subscriber = require('./models/subscriber'),
-  usersController = require('./controllers/usersController');
+  mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
@@ -34,9 +33,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/users', usersController.index, usersController.viewUsers);
+app.get('/users', usersController.index, usersController.indexView);
+app.get('/subscribers', subscribersController.index, subscribersController.indexView);
+app.get('/courses', coursesController.index, coursesController.indexView);
 
-app.get('/subscribers', subscribersController.getAllSubscribers);
 app.get('/subscribe', subscribersController.getSubscriptionPage);
 app.post('/subscribe', subscribersController.saveSubscriber);
 

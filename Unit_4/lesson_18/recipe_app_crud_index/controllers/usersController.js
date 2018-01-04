@@ -14,10 +14,10 @@ module.exports = {
       next(error);
     });
   },
-  viewUsers: (req, res, next) => {
-    console.log(res.locals.users);
+  indexView: (req, res) => {
     res.render('users/index');
   }
+
   // index: (req, res) => {
   //   User.find({})
   //   .then(users => {

@@ -3,20 +3,19 @@
 const Subscriber = require('../models/subscriber');
 
 module.exports = {
-  getAllSubscribers: (req, res) => {
-    Subscriber.find({}, (error, subscribers) => {
-      return new Promise((resolve, reject) =>{
-        if(error) reject(error);
-        resolve(subscribers)
-      });
-    }).then((subscribers) =>{
-      res.render('subscribers', {subscribers: subscribers}) ;
-    }).catch((error) => {
-      console.log(error.message);
-      return [];
-    }).then(() =>{
-      console.log('promise complete');
+  index: (req, res, next) => {
+    Subscriber.find()
+    .then(subscribers => {
+      res.locals.subscribers = subscribers;
+      next();
+    })
+    .catch( error =>{
+      console.log(`Error fetching subscribers: ${error.message}`);
+      next(error);
     });
+  },
+  indexView: (req, res) => {
+    res.render('subscribers/index');
   },
 
   getSubscriptionPage: (req, res) => {
