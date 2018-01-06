@@ -38,5 +38,22 @@ module.exports = {
   createView: (req, res) => {
     if (res.locals.course) res.redirect('/courses');
     else res.redirect('courses/new');
+  },
+
+  show: (req, res, next) => {
+    var courseId = req.params.id;
+    Course.findById(courseId)
+    .then(course => {
+      res.locals.course = course;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error fetching course by ID: ${error.message}`)
+      next(error);
+    });
+  },
+
+  showView: (req, res) => {
+    res.render('courses/show');
   }
 };

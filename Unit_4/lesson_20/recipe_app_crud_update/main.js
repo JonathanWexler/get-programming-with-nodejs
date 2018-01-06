@@ -42,11 +42,15 @@ router.get('/users/:id', usersController.show, usersController.showView );
 router.get('/subscribers', subscribersController.index, subscribersController.indexView);
 router.get('/subscribers/new', subscribersController.new );
 router.post('/subscribers/create', subscribersController.create, subscribersController.createView );
+router.get('/subscribers/:id', subscribersController.show, subscribersController.showView );
+
 router.get('/subscribe',  subscribersController.new);
 
 router.get('/courses', coursesController.index, coursesController.indexView);
 router.get('/courses/new', coursesController.new );
 router.post('/courses/create', coursesController.create, coursesController.createView );
+router.get('/courses/:id', coursesController.show, coursesController.showView );
+
 
 
 router.get('/courses', homeController.showCourses );

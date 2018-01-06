@@ -38,5 +38,22 @@ module.exports = {
   createView: (req, res) => {
     if (res.locals.subscriber) res.redirect('/subscribers');
     else res.redirect('subscribers/new');
+  },
+
+  show: (req, res, next) => {
+    var subscriberId = req.params.id;
+    Subscriber.findById(subscriberId)
+    .then(subscriber => {
+      res.locals.subscriber = subscriber;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error fetching subscriber by ID: ${error.message}`)
+      next(error);
+    });
+  },
+
+  showView: (req, res) => {
+    res.render('subscribers/show');
   }
 };

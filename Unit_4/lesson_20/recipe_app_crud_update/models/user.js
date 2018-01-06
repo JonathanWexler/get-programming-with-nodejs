@@ -41,7 +41,6 @@ userSchema.virtual('fullName').get(function(){
 });
 
 userSchema.pre('save', function (next) {
-  console.log("HERE SAVING");
   var user = this;
   if (user.subscribedAccount === undefined) {
     Subscriber.findOne({email: user.email})
