@@ -1,7 +1,5 @@
 'use strict';
 
-const http = require('http');
-
 var routes = {
   'GET': {
     '/index.html': (req, res) => {
