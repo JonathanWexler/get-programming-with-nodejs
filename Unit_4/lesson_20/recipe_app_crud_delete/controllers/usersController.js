@@ -23,7 +23,6 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-    console.log(req.body)
 
     var userParams = {name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, zipCode: req.body.zipCode};
     User.create(userParams)

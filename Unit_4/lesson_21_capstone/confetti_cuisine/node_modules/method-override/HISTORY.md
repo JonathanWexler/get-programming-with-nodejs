@@ -1,3 +1,14 @@
+2.3.10 / 2017-09-27
+===================
+
+  * deps: debug@2.6.9
+  * deps: parseurl@~1.3.2
+    - perf: reduce overhead for full URLs
+    - perf: unroll the "fast-path" `RegExp`
+  * deps: vary@~1.1.2
+    - perf: improve header token parsing speed
+  * perf: skip unnecessary parsing of entire header
+
 2.3.9 / 2017-05-19
 ==================
 

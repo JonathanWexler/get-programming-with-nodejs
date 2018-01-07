@@ -1,62 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Jon Wexler">
-  <link rel="icon" href="../../favicon.ico">
-  <script src="js/jquery.min.js"></script>
-
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-  <!-- Custom styles for this template -->
-  <link href="/css/confetti_cuisine.css" rel="stylesheet">
   <title>Confetti Cuisine</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/confetti_cuisine.css">
 </head>
-
 <body>
-
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Confetti Cuisine</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="/courses">Courses <span class="sr-only">(current)</span></a></li>
-          <li><a href="/subscribers/new">Contact</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <%# <li><a href="#">Sign In</a></li>%>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <div class="container">
-
-  </div><!-- /.container -->
+  <div id="nav">
+    <div class="col-6 center">
+      <a href="/"><span class="button">Home</span></a>
+      <a href="/courses"><span class="button">Courses</span></a>
+      <a href="/contact"><span class="button">Contact</span></a>
+    </div>
+    <div class="col-6 center">
+      <h1>Confetti Cuisine</h1>
+    </div>
+  </div>
 
   <%- body %>
 
-
-  <%# <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>%>
-  <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>%>
-
-  <!-- Bootstrap core JQUERY -->
-  <%# <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>%>
-  <%# <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">%>
-  <%# <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>%>
 </body>
 </html>

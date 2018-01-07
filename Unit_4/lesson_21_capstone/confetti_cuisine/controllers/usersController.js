@@ -1,86 +1,107 @@
-// Giving access to the user model
+'use strict';
+
 const User = require('../models/user');
 
-// Setting up callback for users index page
-exports.index = (req, res) => {
-  User.find({})
-  .then(users => {
-    res.render('users/index', {users: users})
-  })
-  .catch( error =>{
-    console.log(`Error fetching users: ${error.message}`)
-    res.redirect('/');
-  });
-}
+module.exports = {
+  index: (req, res, next) => {
+    User.find()
+    .then(users => {
+      res.locals.users = users;
+      next();
+    })
+    .catch( error =>{
+      console.log(`Error fetching users: ${error.message}`);
+      next(error);
+    });
+  },
+  indexView: (req, res) => {
+    res.render('users/index');
+  },
 
-// Create action
-exports.new = (req, res) => {
-  res.render('users/new');
-}
-exports.create = (req, res) => {
-  var userParams = getUserParams(req.body);
-  User.create(userParams)
-  .then(user => {
-    res.redirect('/users');
-  })
-  .catch(error => {
-    console.log(`Error fetching users: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  new: (req, res) => {
+    res.render('users/new');
+  },
 
-// Read action
-exports.show = (req, res) => {
-  var userId = req.params.id;
-  User.findById(userId)
-  .then(user => {
-    res.render('users/show', {user: user});
-  })
-  .catch(error => {
-    console.log(`Error fetching user by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  create: (req, res, next) => {
+    var userParams = getUserParams(req.body);
 
-// Update action
-exports.edit = (req, res) => {
-  var userId = req.params.id;
-  User.findById(userId)
-  .then(user => {
-    res.render('users/edit', {user: user});
-  })
-  .catch(error => {
-    console.log(`Error fetching user by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+    User.create(userParams)
+    .then(user => {
+      res.locals.redirect = '/users';
+      res.locals.user = user;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error saving user: ${error.message}`)
+      next(error);
+    });
+  },
 
-exports.update = (req, res) => {
-  var userId = req.params.id;
-  var userParams = getUserParams(req.body);
-  User.findByIdAndUpdate(userId, { $set: userParams })
-  .then(user => {
-    res.redirect(`/users/${userId}`);
-  })
-  .catch(error => {
-    console.log(`Error updating user by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
+  },
 
-// Delete action
-exports.delete = (req, res) => {
-  var userId = req.params.id;
-  User.findByIdAndRemove(userId)
-  .then(user => {
-    console.log(user);
-    res.redirect('/users');
-  })
-  .catch(error => {
-    console.log(`Error deleting user by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  show: (req, res, next) => {
+    var userId = req.params.id;
+    User.findById(userId)
+    .then(user => {
+      res.locals.user = user;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error fetching user by ID: ${error.message}`)
+      next(error);
+    });
+  },
+
+  showView: (req, res) => {
+    res.render('users/show');
+  },
+
+  edit: (req, res, next) => {
+    var userId = req.params.id;
+    User.findById(userId)
+    .then(user => {
+      res.render('users/edit', {user: user});
+    })
+    .catch(error => {
+      console.log(`Error fetching user by ID: ${error.message}`);
+      next(error);
+    });
+  },
+
+  update: (req, res, next) => {
+    var userId = req.params.id,
+    userParams = getUserParams(req.body);
+
+    User.findByIdAndUpdate(userId, { $set: userParams })
+    .then(user => {
+      res.locals.redirect = `/users/${userId}`;
+      res.locals.user = user;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error updating user by ID: ${error.message}`);
+      next(error);
+    });
+  },
+
+  delete: (req, res, next) => {
+    var userId = req.params.id;
+    User.findByIdAndRemove(userId)
+    .then(user => {
+      res.locals.redirect = '/users';
+      next();
+    })
+    .catch(error => {
+      console.log(`Error deleting user by ID: ${error.message}`);
+      next();
+    });
+  }
+
+};
 
 function getUserParams(body) {
   return {name: {first: body.first, last: body.last}, email: body.email, password: body.password, zipCode: body.zipCode};

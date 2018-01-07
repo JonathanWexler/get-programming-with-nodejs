@@ -1,22 +1,20 @@
-<div class="profile">
-  <h1>Course Data for <%= course.name %></h1>
+<h1 class="center">Course Data for <%= course.title %></h1>
 
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <td><%= course.name %></td>
-    </tr>
-    <tr>
-      <th>Description</th>
-      <td><%= course.description%></td>
-    </tr>
-    <tr>
-      <th>Cost</th>
-      <td>$<%= course.cost%></td>
-    </tr>
-    <tr>
-      <th>Max Students</th>
-      <td><%= course.maxStudents%></td>
-    </tr>
-  </table>
-</div>
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <td><%= course.title %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= course.description%></td>
+  </tr>
+  <tr>
+    <th>Max Students</th>
+    <td><%= course.maxStudents%></td>
+  </tr>
+  <tr>
+    <th>Cost</th>
+    <td>$<%= course.cost%></td>
+  </tr>
+</table>

@@ -1,0 +1,20 @@
+{
+  "name": "confetti_cuisine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main"
+  },
+  "author": "Jon Wexler",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "express-ejs-layouts": "^2.3.1",
+    "method-override": "^2.3.9",
+    "mongoose": "^4.11.5"
+  }
+}

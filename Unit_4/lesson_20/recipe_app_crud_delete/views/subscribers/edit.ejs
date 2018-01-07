@@ -1,6 +1,6 @@
 <div class="data-form">
   <form class="form-signin" action="<%=`/subscribers/${subscriber._id}/update?_method=PUT`%>" method="POST">
-    <h2 class="form-signin-heading">Create a new subscriber:</h2>
+    <h2 class="form-signin-heading">Edit subscriber:</h2>
     <label for="inputName">Name</label>
     <input type="text" name="name" id="inputName" class="form-control" value="<%= subscriber.name %>" placeholder="Name" autofocus>
     <label for="inputEmail">Email address</label>

@@ -1,6 +1,6 @@
 <div class="data-form">
   <form class="form-signin" action="<%=`/courses/${course._id}/update?_method=PUT`%>" method="POST">
-    <h2 class="form-signin-heading">Create a new course:</h2>
+    <h2 class="form-signin-heading">Edit course:</h2>
     <label for="inputTitle">Title</label>
     <input type="text" name="title" id="inputTitle" class="form-control" value="<%= course.title %>" placeholder="Title" autofocus>
     <label for="inputDescription">Description</label>

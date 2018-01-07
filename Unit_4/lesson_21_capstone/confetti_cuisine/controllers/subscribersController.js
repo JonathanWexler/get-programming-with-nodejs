@@ -1,89 +1,108 @@
-// Giving access to the subscriber model
+'use strict';
+
 const Subscriber = require('../models/subscriber');
 
-// Setting up callback for subscribers index page
-exports.index = (req, res) => {
-  Subscriber.find({})
-  .then(subscribers => {
-    res.render('subscribers/index', {subscribers: subscribers})
-  })
-  .catch( error =>{
-    console.log(`Error fetching subscribers: ${error.message}`)
-    res.redirect('/');
-  });
-}
+module.exports = {
+  index: (req, res, next) => {
+    Subscriber.find()
+    .then(subscribers => {
+      res.locals.subscribers = subscribers;
+      next();
+    })
+    .catch( error =>{
+      console.log(`Error fetching subscribers: ${error.message}`);
+      next(error);
+    });
+  },
+  indexView: (req, res, next) => {
+    res.render('subscribers/index');
+  },
 
-// Create action
-exports.new = (req, res) => {
-  res.render('subscribers/new');
-}
-exports.create = (req, res) => {
-  var subscriberParams = getSubscriberParams(req.body);
-  Subscriber.create(subscriberParams)
-  .then(subscriber => {
-    res.redirect('/subscribers');
-  })
-  .catch(error => {
-    console.log(`Error fetching subscribers: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  new: (req, res) => {
+    res.render('subscribers/new');
+  },
 
-// Read action
-exports.show = (req, res) => {
-  var subscriberId = req.params.id;
-  Subscriber.findById(subscriberId)
-  .then(subscriber => {
-    res.render('subscribers/show', {subscriber: subscriber});
-  })
-  .catch(error => {
-    console.log(`Error fetching subscriber by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  create: (req, res, next) => {
+    var subscriberParams = subscriberParams = getSubscriberParams(req.body);
+    Subscriber.create(subscriberParams)
+    .then(subscriber => {
+      res.locals.redirect = '/subscribers';
+      res.locals.subscriber = subscriber;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error saving subscriber: ${error.message}`)
+      next(error);
+    });
+  },
 
-// Update action
-exports.edit = (req, res) => {
-  var subscriberId = req.params.id;
-  Subscriber.findById(subscriberId)
-  .then(subscriber => {
-    res.render('subscribers/edit', {subscriber: subscriber});
-  })
-  .catch(error => {
-    console.log(`Error fetching subscriber by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
+  },
+  show: (req, res, next) => {
+    var subscriberId = req.params.id;
+    Subscriber.findById(subscriberId)
+    .then(subscriber => {
+      res.locals.subscriber = subscriber;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error fetching subscriber by ID: ${error.message}`)
+      next(error);
+    });
+  },
 
-exports.update = (req, res) => {
-  var subscriberId = req.params.id;
-  var subscriberParams = getSubscriberParams(req.body);
-  console.log(subscriberParams);
-  Subscriber.findByIdAndUpdate(subscriberId, { $set: subscriberParams })
-  .then(subscriber => {
-    res.redirect(`/subscribers/${subscriberId}`);
-  })
-  .catch(error => {
-    console.log(`Error updating subscriber by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  showView: (req, res) => {
+    res.render('subscribers/show');
+  },
 
-// Delete action
-exports.delete = (req, res) => {
-  var subscriberId = req.params.id;
-  Subscriber.findByIdAndRemove(subscriberId)
-  .then(subscriber => {
-    console.log(subscriber);
-    res.redirect('/subscribers');
-  })
-  .catch(error => {
-    console.log(`Error deleting subscriber by ID: ${error.message}`)
-    res.redirect('/');
-  })
-}
+  edit: (req, res, next) => {
+    var subscriberId = req.params.id;
+    Subscriber.findById(subscriberId)
+    .then(subscriber => {
+      res.render('subscribers/edit', {subscriber: subscriber});
+    })
+    .catch(error => {
+      console.log(`Error fetching subscriber by ID: ${error.message}`);
+      next(error);
+    });
+  },
+
+  update: (req, res, next) => {
+    var subscriberId = req.params.id,
+    subscriberParams = getSubscriberParams(req.body);
+
+    Subscriber.findByIdAndUpdate(subscriberId, { $set: subscriberParams })
+    .then(subscriber => {
+      console.log("HERE")
+      console.log(subscriber)
+
+      res.locals.redirect = `/subscribers/${subscriberId}`;
+      res.locals.subscriber = subscriber;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error updating subscriber by ID: ${error.message}`);
+      next(error);
+    });
+  },
+
+  delete: (req, res, next) => {
+    var subscriberId = req.params.id;
+    Subscriber.findByIdAndRemove(subscriberId)
+    .then(subscriber => {
+      res.locals.redirect = '/subscribers';
+      next();
+    })
+    .catch(error => {
+      console.log(`Error deleting subscriber by ID: ${error.message}`);
+      next();
+    });
+  }
+};
 
 function getSubscriberParams(body) {
-  console.log(body)
   return {name: body.name, email: body.email, zipCode: parseInt(body.zipCode)};
 }

@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
-const {Schema} = require('mongoose');
-const Subscriber = require('./subscriber');
+'use strict';
+
+const mongoose = require('mongoose'),
+Schema = require('mongoose').Schema,
+Subscriber = require('./subscriber');
 
 var userSchema = new Schema({
   name: {
@@ -16,6 +18,7 @@ var userSchema = new Schema({
   email: {
     type: String,
     required: true,
+    lowercase: true,
     unique: true
   },
   zipCode:  {
@@ -23,9 +26,11 @@ var userSchema = new Schema({
     min: [1000, 'Zip code too short'],
     max: 99999
   },
-  password: { type: String, required: true },
+  password: {
+    type: String, required: true
+  },
+  subscribedAccount: {type: Schema.Types.ObjectId, ref: 'Subscriber'},
   courses: [{type: Schema.Types.ObjectId, ref: 'Course'}],
-  subscribedAccount : {type: Schema.Types.ObjectId, ref: 'Subscriber'}
 },
 {
   timestamps: true
@@ -37,17 +42,20 @@ userSchema.virtual('fullName').get(function(){
 
 userSchema.pre('save', function (next) {
   var user = this;
-  if (!user.subscribedAccount) {
+  if (user.subscribedAccount === undefined) {
     Subscriber.findOne({email: user.email})
     .then(subscriber => {
       user.subscribedAccount = subscriber;
+      next();
     })
     .catch(e => {
-      next(e);
       console.log(`Error in connecting subscriber: ${e.message}`);
+      next(e);
     });
+  } else {
+    next();
   }
-  next();
+
 });
 
 module.exports = mongoose.model('User', userSchema);
