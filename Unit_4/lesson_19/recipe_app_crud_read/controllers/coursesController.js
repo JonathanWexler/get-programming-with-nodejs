@@ -23,9 +23,10 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-    var courseParams = {name: req.body.name, email: req.body.email, zipCode: req.body.zipCode};
+    var courseParams = {title: req.body.title, description: req.body.description, items: [req.body.items.split(",")], zipCode: req.body.zipCode};
     Course.create(courseParams)
     .then(course => {
+      res.locals.redirect = '/courses';
       res.locals.course = course;
       next();
     })
@@ -35,9 +36,10 @@ module.exports = {
     });
   },
 
-  createView: (req, res) => {
-    if (res.locals.course) res.redirect('/courses');
-    else res.redirect('courses/new');
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
   },
 
   show: (req, res, next) => {

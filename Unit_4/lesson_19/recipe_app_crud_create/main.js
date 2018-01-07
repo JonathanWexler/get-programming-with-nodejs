@@ -24,7 +24,7 @@ db.once('open', () => { console.log("Successfully connected with Mongoose!")});
 
 app.set('port', process.env.PORT || 3000);
 
-app.set('view engine', 'ejs') 
+app.set('view engine', 'ejs')
 app.use(layouts);
 
 router.use(express.static(`${__dirname}/public`));
@@ -36,16 +36,16 @@ router.get('/', homeController.index);
 
 router.get('/users', usersController.index, usersController.indexView);
 router.get('/users/new', usersController.new );
-router.post('/users/create', usersController.create, usersController.createView );
+router.post('/users/create', usersController.create, usersController.redirectView );
 
 router.get('/subscribers', subscribersController.index, subscribersController.indexView);
 router.get('/subscribers/new', subscribersController.new );
-router.post('/subscribers/create', subscribersController.create, subscribersController.createView );
+router.post('/subscribers/create', subscribersController.create, subscribersController.redirectView );
 router.get('/subscribe',  subscribersController.new);
 
 router.get('/courses', coursesController.index, coursesController.indexView);
 router.get('/courses/new', coursesController.new );
-router.post('/courses/create', coursesController.create, coursesController.createView );
+router.post('/courses/create', coursesController.create, coursesController.redirectView );
 
 
 router.get('/courses', homeController.showCourses );

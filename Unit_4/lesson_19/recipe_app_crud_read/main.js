@@ -36,17 +36,17 @@ router.get('/', homeController.index);
 
 router.get('/users', usersController.index, usersController.indexView);
 router.get('/users/new', usersController.new );
-router.post('/users/create', usersController.create, usersController.createView );
+router.post('/users/create', usersController.create, usersController.redirectView );
 router.get('/users/:id', usersController.show, usersController.showView );
 
 router.get('/subscribers', subscribersController.index, subscribersController.indexView);
 router.get('/subscribers/new', subscribersController.new );
-router.post('/subscribers/create', subscribersController.create, subscribersController.createView );
+router.post('/subscribers/create', subscribersController.create, subscribersController.redirectView );
 router.get('/subscribe',  subscribersController.new);
 
 router.get('/courses', coursesController.index, coursesController.indexView);
 router.get('/courses/new', coursesController.new );
-router.post('/courses/create', coursesController.create, coursesController.createView );
+router.post('/courses/create', coursesController.create, coursesController.redirectView );
 
 
 router.get('/courses', homeController.showCourses );

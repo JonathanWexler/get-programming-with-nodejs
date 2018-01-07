@@ -26,6 +26,7 @@ module.exports = {
     var subscriberParams = {name: req.body.name, email: req.body.email, zipCode: req.body.zipCode};
     Subscriber.create(subscriberParams)
     .then(subscriber => {
+      res.locals.redirect = '/subscribers';
       res.locals.subscriber = subscriber;
       next();
     })
@@ -35,11 +36,11 @@ module.exports = {
     });
   },
 
-  createView: (req, res) => {
-    if (res.locals.subscriber) res.redirect('/subscribers');
-    else res.redirect('subscribers/new');
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
   },
-
   show: (req, res, next) => {
     var subscriberId = req.params.id;
     Subscriber.findById(subscriberId)
@@ -55,5 +56,33 @@ module.exports = {
 
   showView: (req, res) => {
     res.render('subscribers/show');
+  },
+
+  edit: (req, res, next) => {
+    var subscriberId = req.params.id;
+    Subscriber.findById(subscriberId)
+    .then(subscriber => {
+      res.render('subscribers/edit', {subscriber: subscriber});
+    })
+    .catch(error => {
+      console.log(`Error fetching subscriber by ID: ${error.message}`);
+      next(error);
+    });
+  },
+
+  update: (req, res, next) => {
+    var subscriberId = req.params.id,
+    subscriberParams = {name: req.body.name, email: req.body.email, zipCode: req.body.zipCode};
+
+    Subscriber.findByIdAndUpdate(subscriberId, { $set: subscriberParams })
+    .then(subscriber => {
+      res.locals.redirect = `/subscribers/${subscriberId}`;
+      res.locals.subscriber = subscriber;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error updating subscriber by ID: ${error.message}`);
+      next(error);
+    });
   }
 };

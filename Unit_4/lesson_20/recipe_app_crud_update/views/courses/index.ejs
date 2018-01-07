@@ -4,6 +4,7 @@
      <tr>
        <th>Title</th>
        <th>Description</th>
+       <th>Edit</th>
      </tr>
    </thead>
    <tbody>
@@ -15,6 +16,11 @@
       </a>
       </td>
        <td><%= course.description %></td>
+       <td>
+       <a href="<%=`courses/${course._id}/edit`%>">
+         Edit
+       </a>
+       </td>
      </tr>
      <% }); %>
    </tbody>

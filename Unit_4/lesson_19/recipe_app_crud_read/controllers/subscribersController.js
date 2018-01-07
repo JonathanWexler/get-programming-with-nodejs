@@ -26,6 +26,7 @@ module.exports = {
     var subscriberParams = {name: req.body.name, email: req.body.email, zipCode: req.body.zipCode};
     Subscriber.create(subscriberParams)
     .then(subscriber => {
+      res.locals.redirect = '/subscribers';
       res.locals.subscriber = subscriber;
       next();
     })
@@ -35,9 +36,10 @@ module.exports = {
     });
   },
 
-  createView: (req, res) => {
-    if (res.locals.subscriber) res.redirect('/subscribers');
-    else res.redirect('subscribers/new');
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
   },
 
   show: (req, res, next) => {

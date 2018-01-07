@@ -28,6 +28,7 @@ module.exports = {
     var userParams = {name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, zipCode: req.body.zipCode};
     User.create(userParams)
     .then(user => {
+      res.locals.redirect = '/users';
       res.locals.user = user;
       next();
     })
@@ -37,9 +38,10 @@ module.exports = {
     });
   },
 
-  createView: (req, res) => {
-    if (res.locals.user) res.redirect('/users');
-    else res.redirect('users/new');
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
   },
 
   show: (req, res, next) => {
