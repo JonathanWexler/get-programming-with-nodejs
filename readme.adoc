@@ -1,4 +1,5 @@
 = Code Readme
 
-Please put all your code for the book here organized on a folder-per-chapter basis.
-Each chapter folder should also contain a readme file outlining any additional resources or notes on getting the code to run as appropriate
+== Outline of projects
+
+[hello.js](./Unit_0/lesson_2/hello.js)
