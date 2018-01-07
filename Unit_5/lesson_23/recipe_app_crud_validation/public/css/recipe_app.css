@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaina');
+
+body{
+  margin: 0;
+  padding-top: 150px;
+  font-family: Baloo Bhaina;
+}
+#nav{
+  padding-top: 20px;
+  width: 100%;
+  height: 60px;
+  /*background-color: #ED4A0F;*/
+  border-bottom: solid 8px lightblue;
+  box-shadow: 10px 10px 10px #ccc;
+  position: absolute;
+  top: 0;
+}
+.title{
+  color: #D3611E;
+}
+img{
+  width: 100%;
+}
+a{
+  color: #333;
+}
+.col-6{
+  width: 46%;
+  float: left;
+  padding: 0% 2%;
+}
+.col-3{
+  width: 25%;
+  float: left;
+}
+.center{
+  text-align: center;
+}
+.container{
+  padding: 0% 10%;
+}
+.button{
+  background-color: lightblue;
+  padding: .5vw 3vw;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+}
+.button:hover{
+  background-color: lightgreen;
+}
+
+input{
+  display: block;
+}
+
+.subscribers{
+  margin: 0 100px;
+  padding: 20px;
+  border: 2px solid lightblue;
+}
+
+.data-form{
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.table{
+  margin: 0 auto;
+  width: 900px;
+}
+
+.flash{
+  padding: 20px;
+  background-color: lightgray;
+  font-size: 18px;
+}
+.error{
+    color: darkred;
+}
+.success{
+    color: darkgreen;
+}
