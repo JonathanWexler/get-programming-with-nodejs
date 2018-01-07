@@ -23,7 +23,7 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-
+    if (req.skip) next();
     var userParams = {name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, zipCode: req.body.zipCode};
     User.create(userParams)
     .then(user => {
@@ -38,6 +38,7 @@ module.exports = {
       req.flash('error', `Failed to create user account because: ${error.message}.`);
       next();
     });
+
   },
 
   redirectView: (req, res, next) => {
@@ -108,36 +109,55 @@ module.exports = {
     });
   },
 
-login: (req, res) => {
-  res.render('users/login');
-},
+  login: (req, res) => {
+    res.render('users/login');
+  },
 
-authenticate: (req, res, next) => {
-  User.findOne({email: req.body.email})
-  .then(user => {
-    if (user !== null) {
-      user.passwordComparison(req.body.password)
-      .then(passwordsMatch => {
-        if (passwordsMatch) {
-          res.locals.redirect = `/users/${user._id}`;
-          req.flash('success', `${user.fullName}'s logged in successfully!`);
-          res.locals.user = user;
-        } else {
-          req.flash('error', 'Failed to log in user account: Incorrect Password.');
-          res.locals.redirect = '/users/login';
-        }
+  authenticate: (req, res, next) => {
+    User.findOne({email: req.body.email})
+    .then(user => {
+      if (user !== null) {
+        user.passwordComparison(req.body.password)
+        .then(passwordsMatch => {
+          if (passwordsMatch) {
+            res.locals.redirect = `/users/${user._id}`;
+            req.flash('success', `${user.fullName}'s logged in successfully!`);
+            res.locals.user = user;
+          } else {
+            req.flash('error', 'Failed to log in user account: Incorrect Password.');
+            res.locals.redirect = '/users/login';
+          }
+          next();
+        });
+      } else {
+        req.flash('error', 'Failed to log in user account: User account not found.');
+        res.locals.redirect = '/users/login';
         next();
-      });
-    } else {
-      req.flash('error', 'Failed to log in user account: User account not found.');
-      res.locals.redirect = '/users/login';
-      next();
-    }
-  })
-  .catch(error => {
-    console.log(`Error logging in user: ${error.message}`);
-    next(error);
-  });
-}
+      }
+    })
+    .catch(error => {
+      console.log(`Error logging in user: ${error.message}`);
+      next(error);
+    });
+  },
+
+  validate: (req, res, next) => {
+    req.sanitizeBody('email').normalizeEmail({all_lowercase: true, }).trim();
+    req.check('email', 'Email is invalid').isEmail();
+    req.check('zipCode', 'Zip code is invalid').notEmpty().isInt().isLength({min: 5, max: 5}).equals(req.body.zipCode);
+    req.check('password', 'Password cannot be empty').notEmpty();
+
+    req.getValidationResult().then((errors) => {
+      if (!errors.isEmpty()) {
+        let messages = errors.array().map(error => error.msg);
+        req.skip = true;
+        req.flash('error', messages.join(' and '));
+        res.locals.redirect = '/users/new';
+        next();
+      } else {
+        next();
+      }
+    });
+  }
 
 };

@@ -12,6 +12,7 @@ coursesController = require('./controllers/coursesController'),
 usersController = require('./controllers/usersController'),
 
 bodyParser = require('body-parser'),
+expressValidator = require('express-validator'),
 mongoose = require('mongoose'),
 methodOverride = require('method-override'),
 cookieParser = require('cookie-parser'),
@@ -45,12 +46,13 @@ router.use(express.static(`${__dirname}/public`));
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
+app.use(expressValidator());
 
 router.get('/', homeController.index);
 
 router.get('/users', usersController.index, usersController.indexView);
 router.get('/users/new', usersController.new );
-router.post('/users/create', usersController.create, usersController.redirectView );
+router.post('/users/create', usersController.validate, usersController.create, usersController.redirectView );
 router.get('/users/login', usersController.login );
 router.post('/users/login', usersController.authenticate, usersController.redirectView );
 router.get('/users/:id/edit', usersController.edit );
