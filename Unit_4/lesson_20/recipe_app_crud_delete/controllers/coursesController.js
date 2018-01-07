@@ -85,5 +85,18 @@ module.exports = {
       console.log(`Error updating course by ID: ${error.message}`);
       next(error);
     });
+  },
+
+  delete: (req, res, next) => {
+    var courseId = req.params.id;
+    Course.findByIdAndRemove(courseId)
+    .then(course => {
+      res.locals.redirect = '/courses';
+      next();
+    })
+    .catch(error => {
+      console.log(`Error deleting course by ID: ${error.message}`);
+      next();
+    });
   }
 };
