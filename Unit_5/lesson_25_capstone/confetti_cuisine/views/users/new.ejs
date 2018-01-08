@@ -1,16 +1,16 @@
-<div class="text-center">
+<div class="data-form">
   <form class="form-signin" action="/users/create" method="POST">
     <h2 class="form-signin-heading">Create a new user:</h2>
-    <label for="inputFirstName" class="sr-only">First Name</label>
-    <input type="text" name="first" id="inputFirstName"  class="form-control" placeholder="First" autofocus value=<%= locals.first ? locals.first : "" %>>
-    <label for="inputLastName" class="sr-only">First Name</label>
-    <input type="text" name="last" id="inputLastName" class="form-control" placeholder="Last" value=<%= locals.last ? locals.last : "" %>>
-    <label for="inputPassword" class="sr-only">Password</label>
+    <label for="inputFirstName">First Name</label>
+    <input type="text" name="first" id="inputFirstName" class="form-control" placeholder="First" autofocus>
+    <label for="inputLastName">First Name</label>
+    <input type="text" name="last" id="inputLastName" class="form-control" placeholder="Last">
+    <label for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required value=<%= locals.email ? locals.email : "" %> >
-    <label for="inputZipCode" class="sr-only">Zip Code</label>
-    <input type="text" name="zipCode" id="inputZipCode" pattern="\d*" class="form-control" placeholder="Zip Code" value=<%= locals.zipCode ? locals.zipCode : "" %>>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <label for="inputEmail">Email address</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+    <label for="inputZipCode">Zip Code</label>
+    <input type="text" name="zipCode" id="inputZipCode" pattern="\d*" class="form-control" placeholder="Zip Code" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </form>
 </div>

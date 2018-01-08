@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
-const {Schema} = require('mongoose');
+'use strict';
 
-var coursesSchema = new Schema({
-  name: {
+const mongoose = require('mongoose'),
+  Schema = require('mongoose').Schema;
+
+var courseSchema = new Schema({
+  title: {
     type: String,
     required: true,
     unique: true
@@ -21,6 +23,8 @@ var coursesSchema = new Schema({
     default: 0,
     min: [0, "Course cannot have a negative cost"]
   }
+},{
+  timestamps: true
 });
 
-module.exports = mongoose.model('Course', coursesSchema);
+module.exports = mongoose.model('Course', courseSchema);

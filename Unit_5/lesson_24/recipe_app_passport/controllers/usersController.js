@@ -121,7 +121,6 @@ module.exports = {
   }),
 
   validate: (req, res, next) => {
-    console.log("SAN")
     req.sanitizeBody('email').normalizeEmail({all_lowercase: true, }).trim();
     req.check('email', 'Email is invalid').isEmail();
     req.check('zipCode', 'Zip code is invalid').notEmpty().isInt().isLength({min: 5, max: 5}).equals(req.body.zipCode);
