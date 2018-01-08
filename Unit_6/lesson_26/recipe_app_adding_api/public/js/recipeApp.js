@@ -1,3 +1,5 @@
+'user strict';
+
 $(document).ready(()=>{
   $("#modal-button").click(()=>{
     $(".modal-body").html('');
