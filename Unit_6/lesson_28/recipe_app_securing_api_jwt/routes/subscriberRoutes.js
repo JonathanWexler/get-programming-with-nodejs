@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 const router = require('express').Router(),
 subscribersController = require('../controllers/subscribersController');

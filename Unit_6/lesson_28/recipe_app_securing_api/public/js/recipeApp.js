@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 $(document).ready(()=>{
   $("#modal-button").click(()=>{
