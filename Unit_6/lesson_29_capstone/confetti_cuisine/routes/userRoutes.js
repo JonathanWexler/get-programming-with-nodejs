@@ -1,17 +1,17 @@
-const router = require('express').Router();
-const usersController = require('../controllers/usersController');
+'use strict';
 
-// USER ROUTES
-router.get('/login', usersController.login );
-router.get('/logout', usersController.logout );
-router.post('/login', usersController.authenticate );
+const router = require('express').Router(),
+usersController = require('../controllers/usersController');
 
-router.get('/', usersController.index );
+router.get('/', usersController.index, usersController.indexView);
 router.get('/new', usersController.new );
-router.post('/create', usersController.validate, usersController.create );
-router.get('/:id', usersController.show );
+router.post('/create', usersController.validate, usersController.create, usersController.redirectView );
+router.get('/login', usersController.login );
+router.post('/login', usersController.authenticate);
+router.get('/logout', usersController.logout, usersController.redirectView );
 router.get('/:id/edit', usersController.edit );
-router.put('/:id/update', usersController.update );
-router.delete('/:id/delete', usersController.delete );
+router.put('/:id/update', usersController.update, usersController.redirectView );
+router.get('/:id', usersController.show, usersController.showView );
+router.delete('/:id/delete', usersController.delete, usersController.redirectView  );
 
 module.exports = router;
