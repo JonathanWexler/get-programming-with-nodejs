@@ -15,8 +15,6 @@ $(document).ready(()=>{
       })
     });
 
-  // });
-
   function addJoinButtonListener() {
     $(".join-button").click((e)=>{
       let button = $(e.target),
