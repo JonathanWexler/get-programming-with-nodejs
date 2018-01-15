@@ -35,8 +35,7 @@ app.use((req, res, next) =>{
 });
 
 mongoose.Promise = global.Promise;
-
-mongoose.connect('mongodb://localhost/recipe_db');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/recipe_db');
 var db = mongoose.connection;
 
 db.once('open', () => { console.log("Successfully connected with Mongoose!")});
@@ -58,9 +57,9 @@ app.use(expressValidator());
 
 app.use("/", router);
 
-var port = 3000;
-
-const server = app.listen(port, ()=>{
+var port = process.env.PORT || 3000,
+server = app.listen(port, ()=>{
   console.log(`Server running at http://localhost:${port}`);
-}), io = require('socket.io')(server),
- chatController = require('./controllers/chatController')(io);
+}),
+io = require('socket.io')(server),
+chatController = require('./controllers/chatController')(io);
