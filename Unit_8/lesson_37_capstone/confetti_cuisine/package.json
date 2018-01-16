@@ -20,6 +20,7 @@
     "express-validator": "^4.3.0",
     "method-override": "^2.3.10",
     "mongoose": "^5.0.0-rc1",
+    "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-local-mongoose": "^4.4.0",
     "socket.io": "^2.0.4"

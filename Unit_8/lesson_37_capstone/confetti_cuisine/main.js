@@ -12,17 +12,19 @@ cookieParser = require('cookie-parser'),
 expressSession = require('express-session'),
 expressValidator = require('express-validator'),
 bodyParser = require('body-parser'),
+morgan = require('morgan'),
 mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/confetti_cuisine');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/confetti_cuisine_db');
 var db = mongoose.connection;
 
-app.set('port', process.env.PORT || 3000);
+const port =  process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.use(layouts);
 app.use(express.static(`${__dirname}/public`));
+app.use(morgan('combined'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -48,7 +50,7 @@ app.use((req, res, next) => {
 
 app.use("/",router);
 
-const server = app.listen(app.get('port'), () => {
+const server = app.listen(port, () => {
   console.log("Server running at http://localhost:3000");
 });
 
