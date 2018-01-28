@@ -4,6 +4,8 @@
 
 ### Unit 0
 
+#### Lesson 2
+
 - [hello.js](./Unit_0/lesson_2/hello.js)
 - [messages.js](./Unit_0/lesson_2/messages.js)
 - [positive_messages.js](./Unit_0/lesson_2/positive_messages.js)
