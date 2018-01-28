@@ -2,4 +2,4 @@
 
 const messageModule = require('./messages');
 
-messageModule.messages.forEach( m  => console.log(m));
+messageModule.messages.forEach(m => console.log(m));
