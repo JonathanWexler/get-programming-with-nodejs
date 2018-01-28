@@ -1,7 +1,7 @@
 'use strict';
 
-const port = 3000;
-const http = require('http'),
+const port = 3000,
+  http = require('http'),
   app = http.createServer((request, response) => {
     console.log("Received an incoming request!");
     response.writeHead(200, {
