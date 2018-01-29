@@ -1,17 +1,28 @@
 'use strict';
 
-const http = require('http'),
-  fs = require('fs');
+const port = 3000,
+  http = require('http'),
+  fs = require('fs'),
+  httpStatus = require('http-status-codes');
 
-http.createServer( (req, res) => {
-  fs.readFile(`views${req.url}.html`, (error, data) => {
+// The routeMap is now changed to getViewUrl method.
+let getViewUrl = (url) => {
+  return `views${url}.html`;
+};
+
+http.createServer((req, res) => {
+  let viewUrl = getViewUrl(req.url);
+  fs.readFile(viewUrl, (error, data) => {
     if (error) {
-      res.writeHead(404);
-      res.write("FILE NOT FOUND");
+      res.writeHead(httpStatus.NOT_FOUND);
+      res.write("<h1>FILE NOT FOUND</h1>");
     } else {
-      res.writeHead(200, {"Content-Type": "text/html"});
+      res.writeHead(httpStatus.OK, {
+        "Content-Type": "text/html"
+      });
       res.write(data);
     }
     res.end();
   });
-}).listen(3000);
+}).listen(port);
+console.log(`The server has started and is listening on port number: ${port}`);
