@@ -1,24 +1,29 @@
 'use strict';
 
-const http = require('http'),
+const port = 3000,
+  http = require('http'),
+  httpStatusCodes = require('http-status-codes'),
   router = require('./router'),
-  fs = require('fs');
+  fs = require('fs'),
+  plainTextContentType = {
+    "Content-Type": "text/plain"
+  },
+  htmlContentType = {
+    "Content-Type": "text/html"
+  };
 
-http.createServer(router.handle).listen(3000);
-console.log('Server running at http://localhost:3000');
-
-router.get('/', (req, res)=>{
-  res.writeHead(200, {"Content-Type": "text/plain"});
+router.get('/', (req, res) => {
+  res.writeHead(httpStatusCodes.OK, plainTextContentType);
   res.end("INDEX");
 });
 
-router.get('/index.html', (req, res)=>{
-  res.writeHead(200, {"Content-Type": "text/html"});
+router.get('/index.html', (req, res) => {
+  res.writeHead(httpStatusCodes.OK, htmlContentType);
   customReadFile('views/index.html', res);
 });
 
-router.post('/', (req, res)=>{
-  res.writeHead(200, {"Content-Type": "text/plain"});
+router.post('/', (req, res) => {
+  res.writeHead(httpStatusCodes.OK, plainTextContentType);
   res.end("POSTED");
 });
 
@@ -31,3 +36,6 @@ function customReadFile(file, res) {
     res.end(data);
   });
 }
+
+http.createServer(router.handle).listen(3000);
+console.log(`The server has started and is listening on port number: ${port}`);
