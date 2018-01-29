@@ -1,17 +1,29 @@
 'use strict';
 
-const http = require('http'),
+const port = 3000,
+  http = require('http'),
+  httpStatus = require('http-status-codes'),
   fs = require('fs');
 
-http.createServer( (req, res) => {
-  if(req.url === '/') {
-    fs.readFile('views/index.html', (error, data) => {
-      res.writeHead(200, {"Content-Type": "text/html"});
+// Map of routes and view templates
+let routeMap = {
+  '/': 'views/index.html'
+};
+
+http.createServer((req, res) => {
+  if (routeMap[req.url]) {
+    fs.readFile(routeMap[req.url], (error, data) => {
+      res.writeHead(httpStatus.OK, {
+        "Content-Type": "text/html"
+      });
       res.write(data);
       res.end();
     });
-  } else{
-    res.writeHead(200, {"Content-Type": "text/html"});
+  } else {
+    res.writeHead(httpStatus.OK, {
+      "Content-Type": "text/html"
+    });
     res.end('<h1>Sorry, not found.</h1>');
   }
-}).listen(3000);
+}).listen(port);
+console.log(`The server has started and is listening on port number: ${port}`);
