@@ -7,6 +7,7 @@ let getJSONString = (obj) => {
 
 const port = 3000,
   http = require('http'),
+  httpStatus = require('http-status-codes'),
   app = http.createServer();
 
 app.on('request', (req, res) => {
@@ -14,7 +15,7 @@ app.on('request', (req, res) => {
   console.log(`URL: ${getJSONString(req.url)}`);
   console.log(`Headers: ${getJSONString(req.headers)}`);
 
-  res.writeHead(200, {
+  res.writeHead(httpStatus.OK, {
     "Content-Type": "text/html"
   });
 
