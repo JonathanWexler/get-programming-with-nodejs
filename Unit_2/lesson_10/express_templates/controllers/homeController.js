@@ -1,6 +1,6 @@
 'use strict';
 
-exports.logRequestPaths =  (req, res, next) => {
+exports.logRequestPaths = (req, res, next) => {
   console.log(`request made to: ${req.url}`);
   next();
 };
@@ -12,5 +12,7 @@ exports.sendReqParam = (req, res) => {
 
 exports.respondWithName = (req, res) => {
   let paramsName = req.params.myName;
-  res.render('index', {name: paramsName});
+  res.render('index', {
+    name: paramsName
+  });
 };
