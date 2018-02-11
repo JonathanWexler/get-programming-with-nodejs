@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 app.use("/",router);
 
 const server = app.listen(app.get('port'), () => {
-  console.log("Server running at http://localhost:3000");
+  console.log(`Server running at http://localhost:${app.get('port')}`);
 });
 
 const io = require('socket.io')(server),

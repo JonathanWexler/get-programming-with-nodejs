@@ -39,5 +39,5 @@ app.use(errorController.pageNotFoundError);
 app.use(errorController.internalServerError);
 
 app.listen(app.get('port'), () => {
-   console.log("Server running at http://localhost:3000");
+   console.log(`Server running at http://localhost:${app.get('port')}`);
 });

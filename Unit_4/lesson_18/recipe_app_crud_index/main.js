@@ -18,7 +18,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/recipe_db');
 var db = mongoose.connection;
 
-db.once('open', () => { console.log("Successfully connected with Mongoose!")});
+db.once('open', () => { console.log("Successfully connected to MongoDB using Mongoose!")});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -50,5 +50,5 @@ app.use(errorController.pageNotFoundError);
 app.use(errorController.internalServerError);
 
 app.listen(app.get('port'), () => {
-  console.log("Server running at http://localhost:3000");
+  console.log(`Server running at http://localhost:${app.get('port')}`);
 });

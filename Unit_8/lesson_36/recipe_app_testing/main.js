@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'test') mongoose.connect('mongodb://localhost/recip
 else mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/recipe_db');
 
 db = mongoose.connection;
-db.once('open', () => { console.log('Successfully connected with Mongoose!'); });
+db.once('open', () => { console.log('Successfully connected to MongoDB using Mongoose!'); });
 module.exports = db;
 
 app.use(cookieParser('secret_passcode'));

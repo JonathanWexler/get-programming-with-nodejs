@@ -38,7 +38,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/recipe_db');
 var db = mongoose.connection;
 
-db.once('open', () => { console.log("Successfully connected with Mongoose!")});
+db.once('open', () => { console.log("Successfully connected to MongoDB using Mongoose!")});
 
 app.set('port', process.env.PORT || 3000);
 
