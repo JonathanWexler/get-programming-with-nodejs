@@ -25,7 +25,7 @@ var userSchema = new Schema({
   },
   zipCode:  {
     type: Number,
-    min: [1000, 'Zip code too short'],
+    min: [10000, 'Zip code too short'],
     max: 99999
   },
   subscribedAccount: {type: Schema.Types.ObjectId, ref: 'Subscriber'},

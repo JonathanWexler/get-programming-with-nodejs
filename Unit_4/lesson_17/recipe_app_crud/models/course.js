@@ -14,9 +14,9 @@ var courseSchema = new Schema({
     required: true
   },
   items: [],
-  zipCode:  {
+  zipCode: {
     type: Number,
-    min: [1000, 'Zip code too short'],
+    min: [10000, 'Zip code too short'],
     max: 99999
   }
 });

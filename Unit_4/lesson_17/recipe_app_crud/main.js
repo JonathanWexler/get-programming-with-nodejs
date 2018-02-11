@@ -18,7 +18,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/recipe_db');
 var db = mongoose.connection;
 
-db.once('open', () => { console.log("Successfully connected to MongoDB using Mongoose!")});
+db.once('open', () => {
+  console.log("Successfully connected to MongoDB using Mongoose!")
+});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -26,7 +28,9 @@ app.set('view engine', 'ejs');
 app.use(layouts);
 app.use(express.static(`${__dirname}/public`));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -37,9 +41,9 @@ app.get('/subscribers', subscribersController.getAllSubscribers);
 app.get('/subscribe', subscribersController.getSubscriptionPage);
 app.post('/subscribe', subscribersController.saveSubscriber);
 
-app.get('/courses', homeController.showCourses );
-app.get('/contact', homeController.showSignUp );
-app.post('/sign-up',homeController.postedSignUpForm );
+app.get('/courses', homeController.showCourses);
+app.get('/contact', homeController.showSignUp);
+app.post('/sign-up', homeController.postedSignUpForm);
 app.post('/contact', homeController.postedContactForm);
 
 // Error middleware
