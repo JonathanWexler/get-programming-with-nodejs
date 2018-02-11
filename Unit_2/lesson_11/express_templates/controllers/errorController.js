@@ -10,9 +10,11 @@
 //   res.send('404 | The page does not exist!');
 // };
 
-exports.respondNoResourceFound = (req, res) =>{
+exports.respondNoResourceFound = (req, res) => {
   res.status(404);
-  res.sendFile('./public/404.html', {root: './'});
+  res.sendFile('./public/404.html', {
+    root: './'
+  });
 };
 
 exports.respondInternalError = (errors, req, res) => {
