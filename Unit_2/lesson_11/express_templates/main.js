@@ -21,5 +21,5 @@ app.use(errorController.respondNoResourceFound);
 app.use(errorController.respondInternalError);
 
 app.listen(app.get('port'), () => {
-  console.log("Server running");
+  console.log(`Server running on port: ${app.get('port')}`);
 });
