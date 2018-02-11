@@ -17,7 +17,7 @@ module.exports = {
     }).then(() =>{
       console.log('promise complete');
     });
-  }
+  },
   
   getSubscriptionPage: (req, res) => {
     res.render('subscribe');
