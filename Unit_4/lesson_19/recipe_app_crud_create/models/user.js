@@ -21,22 +21,28 @@ var userSchema = new Schema({
     lowercase: true,
     unique: true
   },
-  zipCode:  {
+  zipCode: {
     type: Number,
     min: [10000, 'Zip code too short'],
     max: 99999
   },
   password: {
-    type: String, required: true
+    type: String,
+    required: true
   },
-  courses: [{type: Schema.Types.ObjectId, ref: 'Course'}],
-  subscribedAccount: {type: Schema.Types.ObjectId, ref: 'Subscriber'}
-},
-{
+  courses: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Course'
+  }],
+  subscribedAccount: {
+    type: Schema.Types.ObjectId,
+    ref: 'Subscriber'
+  }
+}, {
   timestamps: true
 });
 
-userSchema.virtual('fullName').get(function(){
+userSchema.virtual('fullName').get(function () {
   return `${this.name.first} ${this.name.last}`;
 });
 
