@@ -25,3 +25,14 @@
     subscribed account </a>.
     </h4>
 <% } %>
+<div class="center">
+  <a href="<%=`/users/${user._id}/edit`%>">
+    Edit User Details
+  </a>
+</div>
+<div class="center">
+  <a href=<%= `/users/${user._id}/delete?_method=DELETE` %> onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+</div>
+<div class="center">
+  <a href="/users">View all users</a>
+</div>
