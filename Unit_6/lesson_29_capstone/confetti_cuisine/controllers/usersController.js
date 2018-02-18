@@ -6,14 +6,14 @@ const User = require('../models/user'),
 module.exports = {
   index: (req, res, next) => {
     User.find()
-    .then(users => {
-      res.locals.users = users;
-      next();
-    })
-    .catch( error =>{
-      console.log(`Error fetching users: ${error.message}`);
-      next(error);
-    });
+      .then(users => {
+        res.locals.users = users;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching users: ${error.message}`);
+        next(error);
+      });
   },
   indexView: (req, res) => {
     res.render('users/index');
@@ -50,14 +50,14 @@ module.exports = {
   show: (req, res, next) => {
     var userId = req.params.id;
     User.findById(userId)
-    .then(user => {
-      res.locals.user = user;
-      next();
-    })
-    .catch(error => {
-      console.log(`Error fetching user by ID: ${error.message}`)
-      next(error);
-    });
+      .then(user => {
+        res.locals.user = user;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching user by ID: ${error.message}`)
+        next(error);
+      });
   },
 
   showView: (req, res) => {
@@ -67,42 +67,46 @@ module.exports = {
   edit: (req, res, next) => {
     var userId = req.params.id;
     User.findById(userId)
-    .then(user => {
-      res.render('users/edit', {user: user});
-    })
-    .catch(error => {
-      console.log(`Error fetching user by ID: ${error.message}`);
-      next(error);
-    });
+      .then(user => {
+        res.render('users/edit', {
+          user: user
+        });
+      })
+      .catch(error => {
+        console.log(`Error fetching user by ID: ${error.message}`);
+        next(error);
+      });
   },
 
   update: (req, res, next) => {
     var userId = req.params.id,
-    userParams = getUserParams(req.body);
+      userParams = getUserParams(req.body);
 
-    User.findByIdAndUpdate(userId, { $set: userParams })
-    .then(user => {
-      res.locals.redirect = `/users/${userId}`;
-      res.locals.user = user;
-      next();
-    })
-    .catch(error => {
-      console.log(`Error updating user by ID: ${error.message}`);
-      next(error);
-    });
+    User.findByIdAndUpdate(userId, {
+        $set: userParams
+      })
+      .then(user => {
+        res.locals.redirect = `/users/${userId}`;
+        res.locals.user = user;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error updating user by ID: ${error.message}`);
+        next(error);
+      });
   },
 
   delete: (req, res, next) => {
     var userId = req.params.id;
     User.findByIdAndRemove(userId)
-    .then(user => {
-      res.locals.redirect = '/users';
-      next();
-    })
-    .catch(error => {
-      console.log(`Error deleting user by ID: ${error.message}`);
-      next();
-    });
+      .then(user => {
+        res.locals.redirect = '/users';
+        next();
+      })
+      .catch(error => {
+        console.log(`Error deleting user by ID: ${error.message}`);
+        next();
+      });
   },
 
   login: (req, res) => {
@@ -117,9 +121,14 @@ module.exports = {
   }),
 
   validate: (req, res, next) => {
-    req.sanitizeBody('email').normalizeEmail({all_lowercase: true, }).trim();
+    req.sanitizeBody('email').normalizeEmail({
+      all_lowercase: true,
+    }).trim();
     req.check('email', 'Email is invalid').isEmail();
-    req.check('zipCode', 'Zip code is invalid').notEmpty().isInt().isLength({min: 5, max: 5}).equals(req.body.zipCode);
+    req.check('zipCode', 'Zip code is invalid').notEmpty().isInt().isLength({
+      min: 5,
+      max: 5
+    }).equals(req.body.zipCode);
     req.check('password', 'Password cannot be empty').notEmpty();
 
     req.getValidationResult().then((errors) => {
@@ -135,7 +144,7 @@ module.exports = {
     });
   },
 
-  logout: (req, res, next) =>{
+  logout: (req, res, next) => {
     req.logout();
     req.flash('success', "You have been logged out!");
     res.locals.redirect = '/';
@@ -145,5 +154,13 @@ module.exports = {
 };
 
 function getUserParams(body) {
-  return {name: {first: body.first, last: body.last}, email: body.email, password: body.password, zipCode: body.zipCode};
+  return {
+    name: {
+      first: body.first,
+      last: body.last
+    },
+    email: body.email,
+    password: body.password,
+    zipCode: body.zipCode
+  };
 }
