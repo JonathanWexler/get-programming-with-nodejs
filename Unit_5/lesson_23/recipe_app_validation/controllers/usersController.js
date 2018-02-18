@@ -124,7 +124,7 @@ module.exports = {
             req.flash('success', `${user.fullName}'s logged in successfully!`);
             res.locals.user = user;
           } else {
-            req.flash('error', 'Failed to log in user account: Incorrect Password.');
+            req.flash('error', 'Your account or password is incorrect. Please try again or contact your system administrator!');
             res.locals.redirect = '/users/login';
           }
           next();
