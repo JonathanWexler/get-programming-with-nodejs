@@ -1,18 +1,18 @@
 'use strict';
 
 const express = require('express'),
-layouts = require('express-ejs-layouts'),
-app = express(),
-router = require('./routes/index'),
-methodOverride = require('method-override'),
-connectFlash = require('connect-flash'),
-passport = require('passport'),
-User = require('./models/user'),
-cookieParser = require('cookie-parser'),
-expressSession = require('express-session'),
-expressValidator = require('express-validator'),
-bodyParser = require('body-parser'),
-mongoose = require('mongoose');
+  layouts = require('express-ejs-layouts'),
+  app = express(),
+  router = require('./routes/index'),
+  methodOverride = require('method-override'),
+  connectFlash = require('connect-flash'),
+  passport = require('passport'),
+  User = require('./models/user'),
+  cookieParser = require('cookie-parser'),
+  expressSession = require('express-session'),
+  expressValidator = require('express-validator'),
+  bodyParser = require('body-parser'),
+  mongoose = require('mongoose');
 
 
 mongoose.connect('mongodb://localhost/confetti_cuisine');
@@ -24,11 +24,20 @@ app.set('view engine', 'ejs');
 app.use(layouts);
 app.use(express.static(`${__dirname}/public`));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 
 app.use(cookieParser('secretCuisine123'));
-app.use(expressSession({ secret: 'secretCuisine123', cookie: { maxAge: 4000000 }, resave: false, saveUninitialized: false}));
+app.use(expressSession({
+  secret: 'secretCuisine123',
+  cookie: {
+    maxAge: 4000000
+  },
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(User.createStrategy());
@@ -37,7 +46,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use(connectFlash());
 app.use(expressValidator());
 
-app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
+app.use(methodOverride('_method', {
+  methods: ['POST', 'GET']
+}));
 
 app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
@@ -46,11 +57,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/",router);
+app.use("/", router);
 
 const server = app.listen(app.get('port'), () => {
   console.log(`Server running at http://localhost:${app.get('port')}`);
 });
 
 const io = require('socket.io')(server),
- chatController = require('./controllers/chatController')(io);
+  chatController = require('./controllers/chatController')(io);
