@@ -1,32 +1,32 @@
-'use strict';
+'use strict'; 
 
-const Subscriber = require('../models/subscriber');
+const Subscriber = require('../models/subscriber'); 
 
-module.exports = {
-  index: (req, res, next) => {
+module.exports =  {
+  index:(req, res, next) =>  {
     Subscriber.find()
-    .then(subscribers => {
-      res.locals.subscribers = subscribers;
-      next();
+    .then(subscribers =>  {
+      res.locals.subscribers = subscribers; 
+      next(); 
     })
-    .catch( error =>{
-      console.log(`Error fetching subscribers: ${error.message}`);
-      next(error);
-    });
-  },
-  indexView: (req, res, next) => {
-    res.render('subscribers/index');
-  },
+    .catch(error =>  {
+      console.log(`Error fetching subscribers:${error.message}`); 
+      next(error); 
+    }); 
+  }, 
+  indexView:(req, res, next) =>  {
+    res.render('subscribers/index'); 
+  }, 
 
-  new: (req, res) => {
-    res.render('subscribers/new');
-  },
+  new:(req, res) =>  {
+    res.render('subscribers/new'); 
+  }, 
 
-  create: (req, res, next) => {
-    var subscriberParams = {name: req.body.name, email: req.body.email, zipCode: req.body.zipCode};
+  create:(req, res, next) =>  {
+    var subscriberParams =  {name:req.body.name, email:req.body.email, zipCode:req.body.zipCode}; 
     Subscriber.create(subscriberParams)
-    .then(subscriber => {
-      res.locals.redirect = '/subscribers';
+    .then(subscriber =>  {
+      res.locals.redirect = '/subscribers'; 
       req.flash('success', `${subscriber.name}'s account created successfully!`);
       res.locals.subscriber = subscriber;
       next();
@@ -80,23 +80,23 @@ module.exports = {
     Subscriber.findByIdAndUpdate(subscriberId, { $set: subscriberParams })
     .then(subscriber => {
       res.locals.redirect = `/subscribers/${subscriberId}`;
-      req.flash('success', `${subscriber.name}'s account updated successfully!`);
-      res.locals.subscriber = subscriber;
-      next();
+      req.flash('success', `${subscriber.name}'s account updated successfully ! `); 
+      res.locals.subscriber = subscriber; 
+      next(); 
     })
-    .catch(error => {
-      console.log(`Error updating subscriber by ID: ${error.message}`);
-      req.flash('error', `Failed to update subscriber account because: ${error.message}.`);
-      res.locals.redirect = `/subscribers/${subscriberId}/edit`;
-      next();
-    });
-  },
+    .catch(error =>  {
+      console.log(`Error updating subscriber by ID:${error.message}`); 
+      req.flash('error', `Failed to update subscriber account because:${error.message}.`); 
+      res.locals.redirect = `/subscribers/${subscriberId}/edit`; 
+      next(); 
+    }); 
+  }, 
 
-  delete: (req, res, next) => {
-    var subscriberId = req.params.id;
+  delete:(req, res, next) =>  {
+    var subscriberId = req.params.id; 
     Subscriber.findByIdAndRemove(subscriberId)
-    .then(subscriber => {
-      res.locals.redirect = '/subscribers';
+    .then(subscriber =>  {
+      res.locals.redirect = '/subscribers'; 
       req.flash('success', `${subscriber.name}'s account deleted successfully!`);
       next();
     })

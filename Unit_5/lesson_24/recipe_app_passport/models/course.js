@@ -1,26 +1,26 @@
-'use strict';
+'use strict'; 
 
-const mongoose = require('mongoose'),
-  Schema = require('mongoose').Schema;
+const mongoose = require('mongoose'), 
+  Schema = require('mongoose').Schema; 
 
-var courseSchema = new Schema({
+var courseSchema = new Schema( {
   title: {
-    type: String,
-    required: true,
-    unique: true
-  },
+    type:String, 
+    required:true, 
+    unique:true
+  }, 
   description: {
-    type: String,
-    required: true
-  },
-  items: [],
-  zipCode:  {
-    type: Number,
-    min: [10000, 'Zip code too short'],
-    max: 99999
+    type:String, 
+    required:true
+  }, 
+  items:[], 
+  zipCode: {
+    type:Number, 
+    min:[10000, 'Zip code too short'], 
+    max:99999
   }
-},{
-  timestamps: true
-});
+},  {
+  timestamps:true
+}); 
 
-module.exports = mongoose.model('Course', courseSchema);
+module.exports = mongoose.model('Course', courseSchema); 

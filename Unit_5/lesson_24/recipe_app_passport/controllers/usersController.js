@@ -1,34 +1,34 @@
-'use strict';
+'use strict'; 
 
-const User = require('../models/user'),
-passport = require('passport');
+const User = require('../models/user'), 
+passport = require('passport'); 
 
-module.exports = {
-  index: (req, res, next) => {
+module.exports =  {
+  index:(req, res, next) =>  {
     User.find()
-    .then(users => {
-      res.locals.users = users;
-      next();
+    .then(users =>  {
+      res.locals.users = users; 
+      next(); 
     })
-    .catch( error =>{
-      console.log(`Error fetching users: ${error.message}`);
-      next(error);
-    });
-  },
-  indexView: (req, res) => {
-    res.render('users/index');
-  },
+    .catch(error =>  {
+      console.log(`Error fetching users:${error.message}`); 
+      next(error); 
+    }); 
+  }, 
+  indexView:(req, res) =>  {
+    res.render('users/index'); 
+  }, 
 
-  new: (req, res) => {
-    res.render('users/new');
-  },
+  new:(req, res) =>  {
+    res.render('users/new'); 
+  }, 
 
-  create: (req, res, next) => {
-    if (req.skip) next();
+  create:(req, res, next) =>  {
+    if (req.skip)next(); 
 
-    let newUser = new User({name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, zipCode: req.body.zipCode});
+    let newUser = new User( {name: {first:req.body.first, last:req.body.last}, email:req.body.email, password:req.body.password, zipCode:req.body.zipCode}); 
 
-    User.register(newUser, req.body.password, (e, user) => {
+    User.register(newUser, req.body.password, (e, user) =>  {
       if (user) {
         req.flash('success', `${user.fullName}'s account created successfully!`);
         res.locals.redirect = '/users';
@@ -83,23 +83,23 @@ module.exports = {
     User.findByIdAndUpdate(userId, { $set: userParams })
     .then(user => {
       res.locals.redirect = `/users/${userId}`;
-      req.flash('success', `${user.fullName}'s account updated successfully!`);
-      res.locals.user = user;
-      next();
+      req.flash('success', `${user.fullName}'s account updated successfully ! `); 
+      res.locals.user = user; 
+      next(); 
     })
-    .catch(error => {
-      console.log(`Error updating user by ID: ${error.message}`);
-      req.flash('error', `Failed to update user account because: ${error.message}.`);
-      res.locals.redirect = `/users/${userId}/edit`;
-      next();
-    });
-  },
+    .catch(error =>  {
+      console.log(`Error updating user by ID:${error.message}`); 
+      req.flash('error', `Failed to update user account because:${error.message}.`); 
+      res.locals.redirect = `/users/${userId}/edit`; 
+      next(); 
+    }); 
+  }, 
 
-  delete: (req, res, next) => {
-    var userId = req.params.id;
+  delete:(req, res, next) =>  {
+    var userId = req.params.id; 
     User.findByIdAndRemove(userId)
-    .then(user => {
-      res.locals.redirect = '/users';
+    .then(user =>  {
+      res.locals.redirect = '/users'; 
       req.flash('success', `${user.fullName}'s account deleted successfully!`);
       next();
     })
