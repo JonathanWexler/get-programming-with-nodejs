@@ -1,4 +1,4 @@
-"strict mode";
+"use strict";
 
 const port = 3000,
   http = require("http"),

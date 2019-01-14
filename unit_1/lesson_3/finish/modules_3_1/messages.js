@@ -1,4 +1,4 @@
-"strict mode";
+"use strict";
 
 exports.messages = [
   "You are great!",

@@ -1,1 +1,1 @@
-"strict mode";
+"use strict";

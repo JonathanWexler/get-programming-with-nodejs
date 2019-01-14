@@ -1,4 +1,4 @@
-"strict mode";
+"use strict";
 
 const routeResponseMap = {
   "/info": "<h1>Info Page</h1>",

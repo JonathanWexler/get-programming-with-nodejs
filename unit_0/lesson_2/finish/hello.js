@@ -1,3 +1,3 @@
-"strict mode";
+"use strict";
 
 console.log("Hello, Universe!");

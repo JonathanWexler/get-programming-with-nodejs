@@ -1,4 +1,4 @@
-"strict mode";
+"use strict";
 
 let messages = [
   "A change of environment can be a good thing!",
