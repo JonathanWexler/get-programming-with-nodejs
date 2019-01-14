@@ -1,0 +1,16 @@
+{
+  "name": "express_templates",
+  "version": "1.0.0",
+  "description": "A Node.js application using Express.js",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Wexler",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-ejs-layouts": "^2.5.0"
+  }
+}
