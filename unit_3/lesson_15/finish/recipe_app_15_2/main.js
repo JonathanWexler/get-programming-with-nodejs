@@ -4,6 +4,7 @@ const express = require("express"),
   app = express(),
   errorController = require("./controllers/errorController"),
   homeController = require("./controllers/homeController"),
+  subscribersController = require("./controllers/subscribersController"),
   layouts = require("express-ejs-layouts"),
   mongoose = require("mongoose"),
   Subscriber = require("./models/subscriber");
@@ -43,11 +44,19 @@ app.use(homeController.logRequestPaths);
 app.get("/name", homeController.respondWithName);
 app.get("/items/:vegetable", homeController.sendReqParam);
 
-app.post("/", (req, res) => {
-  console.log(req.body);
-  console.log(req.query);
-  res.send("POST Successful!");
-});
+app.get(
+  "/subscribers",
+  subscribersController.getAllSubscribers,
+  (req, res, next) => {
+    res.render("subscribers", { subscribers: req.data });
+  }
+);
+
+app.get("/", homeController.index);
+app.get("/courses", homeController.showCourses);
+
+app.get("/contact", subscribersController.getSubscriptionPage);
+app.post("/subscribe", subscribersController.saveSubscriber);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);
