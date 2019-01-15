@@ -1,0 +1,23 @@
+<h2>Subscibers Table</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% subscribers.forEach(subscriber => { %>
+    <tr>
+      <td>
+        <a href="<%= `/subscribers/${subscriber._id}` %>">
+          <%= subscriber.name %>
+        </a>
+      </td>
+      <td>
+        <%= subscriber.email %>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>

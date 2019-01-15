@@ -1,0 +1,29 @@
+<h2>Courses Table</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% courses.forEach(course => { %>
+    <tr>
+      <td>
+        <a href="<%= `/courses/${course._id}` %>">
+          <%= course.title %>
+        </a>
+      </td>
+      <td>
+        <%= course.description %>
+      </td>
+      <td>
+        <a href="<%=`courses/${course._id}/edit`%>">
+          Edit
+        </a>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>

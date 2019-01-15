@@ -25,14 +25,6 @@ db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
-var myQuery = Subscriber.findOne({
-  name: "Jon Wexler"
-}).where("email", /wexler/);
-
-myQuery.exec((error, data) => {
-  if (data) console.log(data.name);
-});
-
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
 

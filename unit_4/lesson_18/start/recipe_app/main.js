@@ -22,14 +22,6 @@ db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
-var myQuery = Subscriber.findOne({
-  name: "Jon Wexler"
-}).where("email", /wexler/);
-
-myQuery.exec((error, data) => {
-  if (data) console.log(data.name);
-});
-
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
 
@@ -46,13 +38,9 @@ app.use(homeController.logRequestPaths);
 app.get("/name", homeController.respondWithName);
 app.get("/items/:vegetable", homeController.sendReqParam);
 
-app.get(
-  "/subscribers",
-  subscribersController.getAllSubscribers,
-  (req, res, next) => {
-    res.render("subscribers", { subscribers: req.data });
-  }
-);
+app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next) => {
+  res.render("subscribers", { subscribers: req.data });
+});
 
 app.get("/", homeController.index);
 app.get("/courses", homeController.showCourses);
