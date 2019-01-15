@@ -1,0 +1,21 @@
+<h2>Courses Table</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% courses.forEach(course => { %>
+    <tr>
+      <td>
+        <%= course.title %>
+      </td>
+      <td>
+        <%= course.description %>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>

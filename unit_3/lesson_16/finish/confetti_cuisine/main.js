@@ -12,7 +12,7 @@ mongoose.connect(
   "mongodb://localhost:27017/confetti_cuisine",
   { useNewUrlParser: true }
 );
-
+mongoose.set("useCreateIndex", true);
 app.set("view engine", "ejs");
 app.set("port", process.env.PORT || 3000);
 app.use(

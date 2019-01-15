@@ -12,7 +12,7 @@ mongoose.connect(
   "mongodb://localhost:27017/recipe_db",
   { useNewUrlParser: true }
 );
-
+mongoose.set("useCreateIndex", true);
 const db = mongoose.connection;
 
 db.once("open", () => {
