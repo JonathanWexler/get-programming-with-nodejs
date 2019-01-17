@@ -31,8 +31,6 @@ router.use(
 router.use(layouts);
 router.use(express.static("public"));
 
-app.use("/", router);
-
 router.use(
   express.urlencoded({
     extended: false
@@ -80,6 +78,8 @@ router.delete("/courses/:id/delete", coursesController.delete, coursesController
 
 router.use(errorController.pageNotFoundError);
 router.use(errorController.internalServerError);
+
+app.use("/", router);
 
 app.listen(app.get("port"), () => {
   console.log(`Server running at http://localhost:${app.get("port")}`);

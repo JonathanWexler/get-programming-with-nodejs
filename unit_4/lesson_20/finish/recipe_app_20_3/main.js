@@ -30,14 +30,13 @@ db.once("open", () => {
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
 
-app.use(express.static("public"));
-app.use(layouts);
-app.use(
+router.use(express.static("public"));
+router.use(layouts);
+router.use(
   express.urlencoded({
     extended: false
   })
 );
-app.use("/", router);
 
 router.use(
   methodOverride("_method", {
@@ -92,6 +91,8 @@ router.post("/subscribe", subscribersController.saveSubscriber);
 router.use(errorController.logErrors);
 router.use(errorController.respondNoResourceFound);
 router.use(errorController.respondInternalError);
+
+app.use("/", router);
 
 app.listen(app.get("port"), () => {
   console.log(`Server running at http://localhost:${app.get("port")}`);
