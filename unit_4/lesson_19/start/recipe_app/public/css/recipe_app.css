@@ -9,7 +9,7 @@ body {
 
 #nav {
   width: 100%;
-  min-height: 60px;
+  min-height: 110px;
   padding: 20px 0 5px 0;
   border-bottom: solid 8px #697acb;
   box-shadow: 10px 10px 10px #ccc;
@@ -30,6 +30,10 @@ img {
 
 a {
   color: #333;
+  text-decoration: none;
+}
+
+#nav a {
   text-decoration: none;
 }
 
