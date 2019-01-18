@@ -11,7 +11,7 @@ body {
   width: 100%;
   height: 110px;
   padding: 20px 0 5px 0;
-  border-bottom: solid 8px #697acb;
+  border-bottom: solid 8px #ee3114;
   box-shadow: 10px 10px 10px #ccc;
   position: absolute;
   top: 0;
@@ -47,7 +47,7 @@ a {
 }
 
 .button {
-  background-color: #3d41b4;
+  background-color: #ed4a0f;
   padding: 0.3vw 3vw;
   border-radius: 2px;
   cursor: pointer;
@@ -57,7 +57,8 @@ a {
 }
 
 .button:hover {
-  background-color: #697acb;
+  background-color: #ffb99f;
+  color: #ed4a0f;
 }
 
 .subscriber {
@@ -71,7 +72,7 @@ a {
 
 .list-container {
   padding: 0 20px;
-  border: 3px solid #697acb;
+  border: 3px solid #ffb568;
   border-radius: 1px;
 }
 
@@ -95,9 +96,13 @@ a {
   margin: 5px 0 0 0;
 }
 
+.hidden-text {
+  -webkit-text-security: disc;
+}
+
 .flash {
-  background: rgba(103, 120, 209, 0.7);
-  color: #fff;
+  background: rgba(193, 255, 193, 0.7);
+  color: #625a56;
   width: 100%;
   text-align: center;
   padding: 10px 30px;
@@ -107,32 +112,42 @@ a {
 }
 
 .error {
+  color: #fff;
   background: rgba(209, 46, 42, 0.7);
+}
+
+.login {
+  position: absolute;
+  top: 0;
+  right: 10px;
 }
 
 button[type="submit"] {
   margin-top: 20px;
 }
 
-.login-status {
+.login {
   position: absolute;
   right: 10px;
   top: 5px;
-}
-
-.log-out {
-  position: absolute;
-  right: 10px;
-}
-
-.login-status .bubble {
   padding: 10px;
   background: #c1ffc1;
   border-radius: 20px;
 }
 
+.login p {
+  margin: 0;
+}
+
+.log-out {
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 10px;
+  background: #fff;
+}
+
 @media (max-width: 760px) {
-  .login-status .bubble {
+  .login {
     overflow: hidden;
     white-space: nowrap;
     font-size: 2vw;
@@ -171,7 +186,6 @@ button[type="submit"] {
 }
 
 .course-description {
-  /* border-bottom: 1px solid #625956; */
   padding: 10px 10px 20px 10px;
   text-align: left;
   margin: 0 10px;
@@ -185,6 +199,15 @@ button[type="submit"] {
   width: 20px;
   height: 40px;
   content: "";
+}
+
+.course-cost {
+  display: inline-block;
+  position: absolute;
+  right: 35px;
+  margin-top: 60px;
+  font-family: "Baloo Bhaina";
+  font-size: 18px;
 }
 
 .modal-body {
@@ -210,6 +233,7 @@ button[type="submit"] {
 #chat {
   width: 100%;
   height: 400px;
+  margin-top: 10px;
   border: 1px solid #635956;
   overflow: scroll;
 }
@@ -232,5 +256,5 @@ button[type="submit"] {
   top: 0px;
   width: 25px;
   color: #fff;
-  background: #6778d1;
+  background: #ee3114;
 }

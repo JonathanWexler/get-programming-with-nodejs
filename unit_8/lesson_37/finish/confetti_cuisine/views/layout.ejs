@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Confetti Cuisine</title>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/js/confettiCuisine.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/confetti_cuisine.css">
+</head>
+
+<body>
+	<div id="nav">
+		<div class="col-sm nav-align">
+			<h1 id="title">Confetti Cuisine</h1>
+		</div>
+		<div class="col-sm nav-align">
+			<a href="/chat" class="chat-icon">@</a>
+			<a href="/">
+				<span class="button">Home</span>
+			</a>
+			<a href="/courses">
+				<span class="button">Courses</span>
+			</a>
+			<a href="/subscribers/new">
+				<span class="button">Contact</span>
+			</a>
+			<a href="/users">
+				<span class="button">Users</span>
+			</a>
+			<%- include courses/_coursesModal %>.
+		</div>
+
+		<div class="login">
+			<% if (loggedIn) { %>
+				<p>Logged in as
+				<a href="<%=`/users/${currentUser._id}`%>">
+				<%= currentUser.fullName %></a>
+				<span class="log-out">
+					<a href="/users/logout">Log out</a>
+				</span>
+				</p>
+			<%} else {%>
+				<a href="/users/login">Log In</a>
+			<% } %>
+		</div>
+	</div>
+	<div class="flashes">
+	<% if (flashMessages) { %>
+		<% if (flashMessages.success) { %>
+			<div class="flash success"><%= flashMessages.success %></div>
+		<% } else if (flashMessages.error) { %>
+			<div class="flash error"><%= flashMessages.error %></div>
+		<% } %>
+	<% } %>
+	</div>
+
+	<div class="container">
+		<%- body %>
+	</div>
+
+</body>
+
+</html>

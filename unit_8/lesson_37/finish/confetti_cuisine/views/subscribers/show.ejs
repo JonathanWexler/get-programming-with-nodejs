@@ -1,0 +1,40 @@
+<h1 class="center">Subscriber Data for
+  <%= subscriber.name %>
+</h1>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <td>
+      <%= subscriber.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td>
+      <%= subscriber.email%>
+    </td>
+  </tr>
+  <tr>
+    <th>Zip Code</th>
+    <td>
+      <%= subscriber.zipCode%>
+    </td>
+  </tr>
+</table>
+
+<p>This subscriber has
+  <%= subscriber.courses.length %> associated course(s)
+</p>
+
+<div>
+  <a class="button" href="<%=`/subscribers/${subscriber._id}/edit`%>">
+    Edit Subscriber Details
+  </a>
+</div>
+<div>
+  <a class="button" href="<%= `/subscribers/${subscriber._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+</div>
+<div>
+  <a class="button" href="/subscribers">View all subscribers</a>
+</div>
