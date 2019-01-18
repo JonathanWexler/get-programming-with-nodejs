@@ -5,6 +5,9 @@
 	<meta charset="utf-8">
 	<title>Recipe App</title>
 	<link rel="shortcut icon" type="image/png" href="/images/icon.png"/>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/recipeApp.js"></script>.
 	<link rel="stylesheet" href="/css/bootstrap.css">
 	<link rel="stylesheet" href="/css/recipe_app.css">
 </head>
@@ -24,6 +27,7 @@
 			<a href="/contact">
 				<span class="button">Contact</span>
 			</a>
+			<%- include courses/_coursesModal %>
 		</div>
 		<div class="login-status">
 			<% if (loggedIn) { %>

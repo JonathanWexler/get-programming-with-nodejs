@@ -10,40 +10,91 @@ mongoose.connection;
 
 // USERS
 var users = [
-  {
-    name: {
-      first: "Jon",
-      last: "Wexler"
+    {
+      name: {
+        first: "Jon",
+        last: "Wexler"
+      },
+      email: "jon@jonwexler.com",
+      zipCode: 10016,
+      password: "12345"
     },
-    email: "jon@jonwexler.com",
-    zipCode: 10016,
-    password: "12345"
-  },
-  {
-    name: {
-      first: "Chef",
-      last: "Eggplant"
+    {
+      name: {
+        first: "Chef",
+        last: "Eggplant"
+      },
+      email: "eggplant@recipeapp.com",
+      zipCode: 20331,
+      password: "12345"
     },
-    email: "eggplant@recipeapp.com",
-    zipCode: 20331,
-    password: "12345"
-  },
-  {
-    name: {
-      first: "Professor",
-      last: "Souffle"
+    {
+      name: {
+        first: "Professor",
+        last: "Souffle"
+      },
+      email: "souffle@recipeapp.com",
+      zipCode: 19103,
+      password: "12345"
+    }
+  ],
+  courses = [
+    {
+      title: "Trust the process",
+      description:
+        "You will be given top quality ingredients -- aged for a year at great loss -- and used to build the potential of the meal.",
+      items: ["Persimmons", "Markelle malts", "Embiid spices"],
+      zipCode: 19025
     },
-    email: "souffle@recipeapp.com",
-    zipCode: 19103,
-    password: "12345"
-  }
-];
+    {
+      title: "Democracy muffins",
+      description:
+        "Although this course does not always have the popular vote, results are bittersweet.",
+      items: ["Orange", "Vanilla", "Sour cream"],
+      zipCode: 23512
+    },
+    {
+      title: "One with everything",
+      description:
+        "This class teaches you a recipe that includes multiple techniques. At the end, you will find enlightment in just ordering food in.",
+      items: ["Lotus root", "Lemon grass", "Tofu"],
+      zipCode: 43234
+    }
+  ];
 
-let createSubscriber = (c, resolve) => {
-  Subscriber.create({
-    name: `${c.name.first} ${c.name.last}`,
-    email: c.email,
+let createCourse = (c, resolve) => {
+  Course.create({
+    title: c.title,
+    description: c.description,
+    items: c.items,
     zipCode: c.zipCode
+  }).then(course => {
+    console.log(`CREATED COURSE: ${course.title}`);
+    resolve(course);
+  });
+};
+
+courses.reduce(
+  (promiseChain, next) => {
+    return promiseChain.then(
+      () =>
+        new Promise(resolve => {
+          createCourse(next, resolve);
+        })
+    );
+  },
+  Course.remove({})
+    .exec()
+    .then(() => {
+      console.log("Course data is empty!");
+    })
+);
+
+let createSubscriber = (s, resolve) => {
+  Subscriber.create({
+    name: `${s.name.first} ${s.name.last}`,
+    email: s.email,
+    zipCode: s.zipCode
   }).then(sub => {
     console.log(`CREATED SUBSCRIBER: ${sub.name}`);
     resolve(sub);

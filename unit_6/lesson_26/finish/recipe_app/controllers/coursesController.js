@@ -15,7 +15,11 @@ module.exports = {
       });
   },
   indexView: (req, res) => {
-    res.render("courses/index");
+    if (req.query.format === "json") {
+      res.json(res.locals.courses);
+    } else {
+      res.render("courses/index");
+    }
   },
   new: (req, res) => {
     res.render("courses/new");
