@@ -1,18 +1,39 @@
 $(document).ready(() => {
   const socket = io();
-
   $("#chatForm").submit(() => {
-    socket.emit("message");
-    $("#chat-input").val("");
+    let text = $("#chat-input").val(),
+      userName = $("#chat-user-name").val(),
+      userId = $("#chat-user-id").val();
+
+    socket.emit("message", {
+      content: text,
+      userName: userName,
+      userId: userId
+    });
+
+    $("#chat_input").val("");
     return false;
   });
 
   socket.on("message", message => {
-    displayMessage(message.content);
+    displayMessage(message);
   });
 
   let displayMessage = message => {
-    $("#chat").prepend($("<li>").html(message));
+		$("#chat").prepend(
+	    $("<li>").html(`
+				<strong class="message ${getCurrentUserClass(message.user)}">
+					${message.userName}
+				</strong>: ${message.content}
+			`)
+		);
+  };
+
+
+
+  let getCurrentUserClass = id => {
+    let userId = $("#chat-user-id").val();
+    return userId === id ? "current-user" : "";
   };
 
   $("#modal-button").click(() => {

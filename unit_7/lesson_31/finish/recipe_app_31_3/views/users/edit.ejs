@@ -1,0 +1,17 @@
+<div class="data-form">
+  <form class="form-signin" method="POST" action="<%=`/users/${user._id}/update?_method=PUT`%>">
+    <h2>Edit user:</h2>
+    <label for="inputFirstName">First Name</label>
+    <input class="form-control" type="text" name="first" id="inputFirstName" value="<%= user.name.first %>" placeholder="First" autofocus>
+    <label for="inputLastName">Last Name</label>
+    <input class="form-control" type="text" name="last" id="inputLastName" value="<%= user.name.last %>" placeholder="Last">
+    <label for="inputPassword">Password</label>
+    <input class="form-control" type="password" name="password" id="inputPassword" value="<%= user.password %>" placeholder="Password" required>
+    <label for="inputEmail">Email address</label>
+    <input class="form-control" type="email" name="email" id="inputEmail" value="<%= user.email %>" placeholder="Email address" required>
+    <label for="inputZipCode">Zip Code</label>
+    <input class="form-control" type="text" name="zipCode" id="inputZipCode" pattern="\d*" value="<%= user.zipCode %>" placeholder="Zip Code" required>
+    <br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+  </form>
+</div>
