@@ -4,12 +4,7 @@ const express = require("express"),
   layouts = require("express-ejs-layouts"),
   app = express(),
   router = require("./routes/index"),
-  homeController = require("./controllers/homeController"),
-  errorController = require("./controllers/errorController"),
-  subscribersController = require("./controllers/subscribersController.js"),
-  usersController = require("./controllers/usersController.js"),
-  coursesController = require("./controllers/coursesController.js"),
-  bodyParser = require("body-parser"),
+  morgan = require("morgan"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override"),
   passport = require("passport"),
@@ -20,8 +15,8 @@ const express = require("express"),
   User = require("./models/user");
 
 mongoose.connect(
-  "mongodb://localhost:27017/confetti_cuisine",
-  { useNewUrlParser: true }
+  process.env.MONGODB_URI || "mongodb://localhost:27017/confetti_cuisine",
+  { useNewUrlParser: true, useFindAndModify: false }
 );
 mongoose.set("useCreateIndex", true);
 
@@ -34,6 +29,7 @@ app.use(
   })
 );
 
+app.use(morgan("combined"));
 app.use(layouts);
 app.use(express.static("public"));
 app.use(expressValidator());
