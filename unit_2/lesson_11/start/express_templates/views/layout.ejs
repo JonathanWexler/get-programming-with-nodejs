@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recipe App</title>
-    <style media="screen">
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        color: black;
-        text-align: center;
-        font-family: sans-serif;
-      }
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+	<title>Recipe App</title>
+	<style media="screen">
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			color: black;
+			text-align: center;
+			font-family: sans-serif;
+		}
 
-      #nav {
-        background-color: #7D498D;
-      }
+		#nav {
+			background-color: #7D498D;
+		}
 
-      #footer {
-        background-color: #9C73A9;
-        position: relative;
-        bottom: 0;
-      }
+		#footer {
+			background-color: #9C73A9;
+			position: relative;
+			bottom: 0;
+		}
 
-      #container {
-        height: 100px;
-        padding-top: 40px;
-      }
+		#container {
+			height: 100px;
+			padding-top: 40px;
+		}
 
-      .block {
-        padding-top: 40px;
-        width: 100%;
-        text-align: center;
-        height: 60px;
-        border: black dashed 5px;
-      }
+		.block {
+			padding-top: 40px;
+			width: 100%;
+			text-align: center;
+			height: 60px;
+			border: black dashed 5px;
+		}
+	</style>
+</head>
 
-    </style>
-  </head>
+<body>
 
-  <body>
-
-    <% include partials/navigation %>
-    <div id="container">
-      <%- body %>
-    </div>
-    <div id="footer" class="block">FOOTER</div>
+	<% include partials/navigation %>
+	<div id="container">
+		<%- body %>
+	</div>
+	<div id="footer" class="block">FOOTER</div>
 
 
-  </body>
+</body>
 
 </html>

@@ -12,6 +12,7 @@ module.exports = io => {
       .then(messages => {
         client.emit("load all messages", messages.reverse());
       });
+
     console.log("new connection");
 
     client.on("disconnect", () => {
