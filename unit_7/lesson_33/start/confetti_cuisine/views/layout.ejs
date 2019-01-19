@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
 	<title>Confetti Cuisine</title>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -35,26 +35,30 @@
 
 		<div class="login">
 			<% if (loggedIn) { %>
-				<p>Logged in as
+			<p>Logged in as
 				<a href="<%=`/users/${currentUser._id}`%>">
-				<%= currentUser.fullName %></a>
+					<%= currentUser.fullName %></a>
 				<span class="log-out">
 					<a href="/users/logout">Log out</a>
 				</span>
-				</p>
+			</p>
 			<%} else {%>
-				<a href="/users/login">Log In</a>
+			<a href="/users/login">Log In</a>
 			<% } %>
 		</div>
 	</div>
 	<div class="flashes">
-	<% if (flashMessages) { %>
+		<% if (flashMessages) { %>
 		<% if (flashMessages.success) { %>
-			<div class="flash success"><%= flashMessages.success %></div>
+		<div class="flash success">
+			<%= flashMessages.success %>
+		</div>
 		<% } else if (flashMessages.error) { %>
-			<div class="flash error"><%= flashMessages.error %></div>
+		<div class="flash error">
+			<%= flashMessages.error %>
+		</div>
 		<% } %>
-	<% } %>
+		<% } %>
 	</div>
 
 	<div class="container">

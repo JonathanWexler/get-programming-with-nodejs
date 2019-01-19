@@ -219,7 +219,8 @@ button[type="submit"] {
   padding: 10px;
 }
 
-.message {}
+.message {
+}
 
 .message.current-user {
   font-weight: bold;

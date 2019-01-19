@@ -3,9 +3,9 @@
 
 <head>
 	<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
 	<title>Recipe App</title>
-	<link rel="shortcut icon" type="image/png" href="/images/icon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/images/icon.png" />
 	<link rel="stylesheet" href="/css/bootstrap.css">
 	<link rel="stylesheet" href="/css/recipe_app.css">
 </head>
@@ -28,28 +28,33 @@
 		</div>
 		<div class="login-status">
 			<% if (loggedIn) { %>
-				<div class="bubble logged-in">
-					Logged in as <a href="<%=`/users/${currentUser._id}`%>"> <%= currentUser.fullName %></a>
-				</div>
-				<div class="log-out">
-					<a href="/users/logout">Log out</a>
-				</div>
+			<div class="bubble logged-in">
+				Logged in as <a href="<%=`/users/${currentUser._id}`%>">
+					<%= currentUser.fullName %></a>
+			</div>
+			<div class="log-out">
+				<a href="/users/logout">Log out</a>
+			</div>
 			<%} else {%>
-				<div class="bubble log-in">
-					<a href="/users/login">Log In</a>
-				</div>
+			<div class="bubble log-in">
+				<a href="/users/login">Log In</a>
+			</div>
 			<% } %>
 		</div>
 	</div>
 
 	<div class="flashes">
-	<% if (flashMessages) { %>
+		<% if (flashMessages) { %>
 		<% if (flashMessages.success) { %>
-			<div class="flash success"><%= flashMessages.success %></div>
+		<div class="flash success">
+			<%= flashMessages.success %>
+		</div>
 		<% } else if (flashMessages.error) { %>
-			<div class="flash error"><%= flashMessages.error %></div>
+		<div class="flash error">
+			<%= flashMessages.error %>
+		</div>
 		<% } %>
-	<% } %>
+		<% } %>
 	</div>
 
 	<div class="container">
