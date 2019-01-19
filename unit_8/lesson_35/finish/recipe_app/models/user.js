@@ -3,9 +3,7 @@
 const mongoose = require("mongoose"),
   { Schema } = mongoose,
   Subscriber = require("./subscriber"),
-  bcrypt = require("bcrypt-nodejs"),
   passportLocalMongoose = require("passport-local-mongoose"),
-  randToken = require("rand-token"),
   userSchema = new Schema(
     {
       name: {

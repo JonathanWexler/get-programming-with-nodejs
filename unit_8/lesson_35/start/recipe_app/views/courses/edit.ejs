@@ -1,0 +1,14 @@
+<div class="data-form">
+  <form class="form-signin" action="<%=`/courses/${course._id}/update?_method=PUT`%>" method="POST">
+    <h2 class="form-signin-heading">Edit course:</h2>
+    <label for="inputTitle">Title</label>
+    <input type="text" name="title" id="inputTitle" class="form-control" value="<%= course.title %>" placeholder="Title" autofocus>
+    <label for="inputDescription">Description</label>
+    <input type="text" name="description" id="inputDescription" class="form-control" value="<%= course.description %>" placeholder="Description">
+    <label for="inputItems">Items</label>
+    <input type="text" name="items" id="inputItems" class="form-control" value="<%= course.items %>" placeholder="Items" required>
+    <label for="inputZipCode">Zip Code</label>
+    <input type="text" name="zipCode" id="inputZipCode" pattern="\d*" class="form-control" value="<%= course.zipCode %>" placeholder="Zip Code" required>
+    <br /><button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+  </form>
+</div>
