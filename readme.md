@@ -1,3 +1,7 @@
+***
+NOTICE: As of *8/14/19*, due to rebasing and updating of code to remove package vulnerabilities, you may need to reclone or re-fork this repo.
+***
+
 # Code Readme
 
 ## Outline of projects
