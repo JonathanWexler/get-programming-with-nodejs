@@ -1,5 +1,12 @@
 ***
-NOTICE: As of *1/20/20*, due to rebasing and updating of code to remove package vulnerabilities, you may need to reclone or re-fork this repo.
+NOTICE: As of *1/20/20*, The following packages have been upgraded due to dependency vulnerabilities:
+
+mongoose --> 5.8.9
+mongodb --> 3.5.2
+bcrypt --> 3.0.0
+node-pre-gyp
+lodash
+
 ***
 
 # Code Readme
