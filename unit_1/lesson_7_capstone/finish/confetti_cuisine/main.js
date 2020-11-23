@@ -8,7 +8,7 @@ const port = 3000,
   utils = require("./utils");
 
 router.get("/", (req, res) => {
-  res.writeHead(httpStatus.OK, contentTypes.htm);
+  res.writeHead(httpStatus.OK, contentTypes.html);
   utils.getFile("views/index.html", res);
 });
 
