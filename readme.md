@@ -1,4 +1,10 @@
 ***
+
+NOTICE: As of *11/20/20*, The following packages have been upgraded due to dependency vulnerabilities:
+
+mongodb --> 3.6.3
+bcrypt --> 5.0.0
+
 NOTICE: As of *1/20/20*, The following packages have been upgraded due to dependency vulnerabilities:
 
 mongoose --> 5.8.9
