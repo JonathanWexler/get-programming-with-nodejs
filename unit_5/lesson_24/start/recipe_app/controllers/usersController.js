@@ -36,7 +36,7 @@ module.exports = {
     res.render("users/new");
   },
   create: (req, res, next) => {
-    if (req.skip) next();
+    if (req.skip) return next();
     let userParams = getUserParams(req.body);
     User.create(userParams)
       .then(user => {

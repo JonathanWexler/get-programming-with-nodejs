@@ -35,7 +35,7 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-    if (req.skip) next();
+    if (req.skip) return next();
     let newUser = new User(getUserParams(req.body));
     User.register(newUser, req.body.password, (e, user) => {
       if (user) {
